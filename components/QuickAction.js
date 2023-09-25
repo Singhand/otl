@@ -13,7 +13,10 @@ export default function QuickAction({ item }) {
 
     function add(params) {
         if (item.type == 1) {
-            HistoryDAO.add(item.itemId, " ", dispatch);
+            // 고정 텍스트
+            HistoryDAO.add(item.itemId, item.title, dispatch);
+        } else if (item.type == 2) {
+            // 직접 입력
         }
     }
 

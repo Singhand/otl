@@ -41,10 +41,12 @@ export function init(item, dispatch) {
     });
 }
 
-export function add(title, folder, dispatch) {
+export function add(quick, dispatch) {
     db.transaction(tx => {
+        console.log('try to add quick', quick)
         let date = new Date();
-        tx.executeSql(`insert into quicks (folderId, title, itemOrder) values(?,?,?)`, [folder, title, date.getTime()],
+        tx.executeSql(`insert into quicks (itemId, title,type, prefix,suffix,itemOrder) values(?,?,?,?,?,?)`,
+            [quick.itemId, quick.title, quick.type, quick.prefix, quick.suffix, date.getTime()],
             (txObj, rs) => {
                 console.log('add success');
             },
@@ -52,7 +54,7 @@ export function add(title, folder, dispatch) {
     }, (err) => { console.log(err); },
 
         () => {
-            init(folder, dispatch);
+            init(quick.itemId, dispatch);
         }
     );
 }

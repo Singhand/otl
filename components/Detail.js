@@ -9,6 +9,7 @@ import History from './History';
 import EditHistoryModal from './EditHistoryModal';
 import ModalButton from './ModalButton';
 import AddQuickModal from './AddQuickModal';
+import EditQuickModal from './EditQuickModal';
 
 import backIcon from '../assets/imgs/back.svg'
 import helpIcon from '../assets/imgs/help.svg'
@@ -19,14 +20,16 @@ import * as HistoryDAO from '../sqlite/history';
 import * as QuickDAO from '../sqlite/quick';
 
 
-export default function Detail({ route }) {
+export default function Detail({ route, navigation }) {
     const { itemId } = route.params;
     console.log('detail', itemId)
 
     // state
     const [showEditHistory, setShowEditHistory] = useState(false)
-    const [selectHis, setSelectHis] = useState(0);
+    const [selectHis, setSelectHis] = useState(0)
+    const [selectQuickIdx, setSelectQuickIdx] = useState(-1)
     const [showAddQuick, setShowAddQuick] = useState(false)
+    const [showEditQuick, setShowEditQuick] = useState(false)
 
     // Redux
     const dispatch = useDispatch();
@@ -44,7 +47,9 @@ export default function Detail({ route }) {
         setShowEditHistory(true)
     }
 
-    function openEditQuick(params) {
+    function openEditQuick(idx) {
+        setSelectQuickIdx(idx)
+        setShowEditQuick(true)
     }
 
     const iter = Array(20).fill(null);
@@ -55,7 +60,7 @@ export default function Detail({ route }) {
                 <TouchableHighlight
                     underlayColor="#333"
                     onPress={() => {
-
+                        navigation.goBack()
                     }}
                     style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
                     <Image source={backIcon} style={[common.icon, {}]}></Image>
@@ -110,14 +115,15 @@ export default function Detail({ route }) {
                 <ScrollView horizontal={true} style={[styles.s, { marginTop: 10 }]}>
                     {quicks != undefined && quicks.map((_, index) => (
                         <View key={index} style={[styles.s, { marginHorizontal: 10 }]}>
-                            <ModalButton text={quicks[index].title}></ModalButton>
+                            <ModalButton text={quicks[index].title} idx={index} click={openEditQuick}></ModalButton>
                         </View>
                     ))}
                 </ScrollView>
             </View>
 
             {showEditHistory && <EditHistoryModal show={setShowEditHistory} item={selectHis}></EditHistoryModal>}
-            {showAddQuick && <AddQuickModal show={setShowAddQuick}></AddQuickModal>}
+            {showAddQuick && <AddQuickModal show={setShowAddQuick} itemId={itemId}></AddQuickModal>}
+            {showEditQuick && <EditQuickModal item={quicks[selectQuickIdx]} idx={selectQuickIdx} show={setShowEditQuick}></EditQuickModal>}
         </View>
     );
 }

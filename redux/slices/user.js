@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
     name: "user",
     initialState: {
-        name: "kim",
-        money: 300,
+        quickType2Modal: false,
+        quickItem: null,
     },
     reducers: {
         modifyByValue: (state, action) => {
