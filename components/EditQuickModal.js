@@ -8,62 +8,66 @@ import { common } from '../style';
 
 import * as QuickDAO from '../sqlite/quick';
 
+import TextInputLine from './TextInputLine';
+
 
 export default function EditQuickModal({ item, idx, show }) {
-
     // Redux
     const dispatch = useDispatch();
+    let quicks = useSelector(state => state.quick.items[`${item.itemId}`]);
 
     const [type, setType] = useState(item.type)
     const [title, setTitle] = useState(item.title)
 
     function edit(param) {
-        ItemDAO.edit(items[itemIdx].id, title, folderId, dispatch);
+        let itemTemp = { ...item }
+        itemTemp.title = title
+        QuickDAO.edit(itemTemp, dispatch);
     }
 
     function remove() {
-        ItemDAO.remove(items[itemIdx].id, folderId, dispatch);
+        QuickDAO.remove(item, dispatch);
         show(false);
     }
 
     function move(parameter) {
-        let itemsTemp = [...items];
+        let quicksTemp = [...quicks];
 
-        if (itemIdx < 0 || itemIdx >= itemsTemp.length) {
-            console.log("itemIdx is out of bounds.");
-            return itemsTemp; // Return the original array unchanged
+        if (idx < 0 || idx >= quicksTemp.length) {
+            console.log("idx is out of bounds.");
+            return quicksTemp; // Return the original array unchanged
         }
 
         switch (parameter) {
             case 1: // Move item to the left once
-                if (itemIdx > 0) {
-                    const temp = itemsTemp[itemIdx];
-                    itemsTemp[itemIdx] = itemsTemp[itemIdx - 1];
-                    itemsTemp[itemIdx - 1] = temp;
+                if (idx > 0) {
+                    const temp = quicksTemp[idx];
+                    quicksTemp[idx] = quicksTemp[idx - 1];
+                    quicksTemp[idx - 1] = temp;
                 }
                 break;
 
             case 2: // Move item to first
-                if (itemIdx > 0) {
-                    const temp = itemsTemp[itemIdx];
-                    itemsTemp.splice(itemIdx, 1); // Remove element at itemIdx
-                    itemsTemp.unshift(temp);   // Add element to the beginning
+                if (idx > 0) {
+                    const temp = quicksTemp[idx];
+                    quicksTemp.splice(idx, 1); // Remove element at idx
+                    quicksTemp.unshift(temp);   // Add element to the beginning
                 }
                 break;
 
             case 3: // Move item to the right once
-                if (itemIdx < itemsTemp.length - 1) {
-                    const temp = itemsTemp[itemIdx];
-                    itemsTemp[itemIdx] = itemsTemp[itemIdx + 1];
-                    itemsTemp[itemIdx + 1] = temp;
+                if (idx < quicksTemp.length - 1) {
+                    const temp = quicksTemp[idx];
+                    quicksTemp[idx] = quicksTemp[idx + 1];
+                    quicksTemp[idx + 1] = temp;
                 }
                 break;
 
             case 4: // Move item to last
-                if (itemIdx < itemsTemp.length - 1) {
-                    const temp = itemsTemp[itemIdx];
-                    itemsTemp.splice(itemIdx, 1);  // Remove element at itemIdx
-                    itemsTemp.push(temp);      // Add element to the end
+                if (idx < quicksTemp.length - 1) {
+                    const temp = quicksTemp[idx];
+                    quicksTemp.splice(idx, 1);  // Remove element at idx
+                    quicksTemp.push(temp);      // Add element to the end
                 }
                 break;
 
@@ -72,7 +76,7 @@ export default function EditQuickModal({ item, idx, show }) {
                 break;
         }
 
-        ItemDAO.updateOrder(itemsTemp, folderId, dispatch);
+        QuickDAO.updateOrder(quicksTemp, item.itemId, dispatch);
     }
 
     return (
@@ -82,7 +86,9 @@ export default function EditQuickModal({ item, idx, show }) {
                     <Text style={[common.text, { fontWeight: 'bold', }]}>빠른 기록 수정</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
-                    <TextInputLine placeholder='이름을 입력하세요' value={title} set={setTitle}></TextInputLine>
+
+                    {type == 1 && <TextInputLine placeholder='고정 텍스트를 입력하세요' value={title} set={setTitle}></TextInputLine>}
+                    {type == 2 && <TextInputLine placeholder='표시될 이름을 입력하세요' value={title} set={setTitle}></TextInputLine>}
                 </View>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
@@ -164,6 +170,5 @@ export default function EditQuickModal({ item, idx, show }) {
 }
 
 const styles = StyleSheet.create({
-
 
 })

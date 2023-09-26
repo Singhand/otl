@@ -2,9 +2,14 @@ import * as SQLite from 'expo-sqlite';
 import { load } from '../redux/slices/history';
 
 const db = SQLite.openDatabase('main.db');
+let searchWord = ''
 
 // drop();
 create();
+
+export function setSearchWord(word) {
+    searchWord = word
+}
 
 export function drop(params) {
     db.transaction(tx => {
@@ -26,7 +31,14 @@ export function create(params) {
 
 export function init(item, dispatch) {
     db.transaction(tx => {
-        tx.executeSql(`select * from history where itemId=? order by created desc`, [item],
+        let sql = ''
+        if (searchWord.length == 0) {
+            sql = `select * from history where itemId=${item} order by created desc`
+        } else {
+            sql = `select * from history where itemId=${item} and content like '%${searchWord}%' order by created desc`
+        }
+        console.log(sql)
+        tx.executeSql(sql, null,
             (txObj, rs) => {
                 console.log('init success-history');
                 let items = [];
@@ -75,6 +87,17 @@ export function remove(history, dispatch) {
             (txObj, rs) => {
                 console.log('delete success');
                 init(history.itemId, dispatch);
+            },
+            (txObj, err) => { console.log(err); });
+    });
+}
+
+export function clear(itemId, dispatch) {
+    db.transaction(tx => {
+        tx.executeSql(`delete from history where itemId=?`, [itemId],
+            (txObj, rs) => {
+                console.log('delete all success');
+                init(itemId, dispatch);
             },
             (txObj, err) => { console.log(err); });
     });

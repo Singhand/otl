@@ -59,33 +59,33 @@ export function add(quick, dispatch) {
     );
 }
 
-export function edit(id, title, folder, dispatch) {
+export function edit(quick, dispatch) {
     db.transaction(tx => {
-        console.log('update title to', title);
-        tx.executeSql(`update quicks set title=? where id=?`, [title, id],
+        console.log('update title to', quick.title);
+        tx.executeSql(`update quicks set title=?, prefix=?, suffix=? where id=?`, [quick.title, quick.prefix, quick.suffix, quick.id],
             (txObj, rs) => {
                 console.log('update success');
-                init(folder, dispatch);
+                init(quick.itemId, dispatch);
             },
             (txObj, err) => { console.log(err); });
     });
 }
 
-export function remove(id, folder, dispatch) {
+export function remove(quick, dispatch) {
     db.transaction(tx => {
-        tx.executeSql(`delete from quicks where id=?`, [id],
+        tx.executeSql(`delete from quicks where id=?`, [quick.id],
             (txObj, rs) => {
                 console.log('delete success');
-                init(folder, dispatch);
+                init(quick.itemId, dispatch);
             },
             (txObj, err) => { console.log(err); });
     });
 }
 
-export function updateOrder(items, folder, dispatch) {
+export function updateOrder(quicks, itemId, dispatch) {
     let date = new Date();
     db.transaction(tx => {
-        items.forEach((item, index) => {
+        quicks.forEach((item, index) => {
             const id = item.id;
             tx.executeSql(`update quicks set itemOrder=? where id=?`, [index, id],
                 (txObj, rs) => {
@@ -95,7 +95,7 @@ export function updateOrder(items, folder, dispatch) {
     }, (err) => { console.log(err); },
         () => {
             console.log('db update suc');
-            init(folder, dispatch);
+            init(itemId, dispatch);
         }
     );
 }

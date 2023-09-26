@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Pressable, Image, TouchableHighlight, ScrollView } from 'react-native'
-import React, { useEffect, useState, useMemo } from 'react'
+import { StyleSheet, Text, View, Pressable, Image, TouchableHighlight, ScrollView, TextInput, Alert } from 'react-native'
+import React, { useEffect, useState, useMemo, useRef } from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,6 +10,7 @@ import EditHistoryModal from './EditHistoryModal';
 import ModalButton from './ModalButton';
 import AddQuickModal from './AddQuickModal';
 import EditQuickModal from './EditQuickModal';
+import TextInputLine from './TextInputLine';
 
 import backIcon from '../assets/imgs/back.svg'
 import helpIcon from '../assets/imgs/help.svg'
@@ -19,10 +20,8 @@ import addIcon from '../assets/imgs/add.svg'
 import * as HistoryDAO from '../sqlite/history';
 import * as QuickDAO from '../sqlite/quick';
 
-
 export default function Detail({ route, navigation }) {
     const { itemId } = route.params;
-    console.log('detail', itemId)
 
     // state
     const [showEditHistory, setShowEditHistory] = useState(false)
@@ -30,6 +29,11 @@ export default function Detail({ route, navigation }) {
     const [selectQuickIdx, setSelectQuickIdx] = useState(-1)
     const [showAddQuick, setShowAddQuick] = useState(false)
     const [showEditQuick, setShowEditQuick] = useState(false)
+    const [showSearch, setShowSearch] = useState(false)
+    const [searchWord, setSearchWord] = useState('')
+
+    // ref
+    const searchInputRef = useRef(null);
 
     // Redux
     const dispatch = useDispatch();
@@ -38,9 +42,23 @@ export default function Detail({ route, navigation }) {
 
 
     useEffect(() => {
-        console.log('useEffect-Detail');
+        console.log('useEffect-Detail', itemId);
+        HistoryDAO.setSearchWord('')
         HistoryDAO.init(itemId, dispatch)
     }, []);
+
+    function focusTextInput() {
+        setTimeout(() => {
+            if (searchInputRef.current) {
+                searchInputRef.current.focus();
+            }
+        }, 10);
+    };
+
+    function searchHis() {
+        HistoryDAO.setSearchWord(searchWord)
+        HistoryDAO.init(itemId, dispatch)
+    }
 
     function openEditHistory(item) {
         setSelectHis(item);
@@ -50,6 +68,24 @@ export default function Detail({ route, navigation }) {
     function openEditQuick(idx) {
         setSelectQuickIdx(idx)
         setShowEditQuick(true)
+    }
+
+    function clearHistory(params) {
+        Alert.alert('기록 초기화', '기록들이 모두 삭제됩니다.', [
+            {
+                text: '취소',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            {
+                text: '삭제', onPress: () => {
+                    console.log('OK Pressed');
+
+                }, style: 'destructive',
+            },
+        ]);
+
+        HistoryDAO.clear(itemId, dispatch)
     }
 
     const iter = Array(20).fill(null);
@@ -73,7 +109,8 @@ export default function Detail({ route, navigation }) {
                 <TouchableHighlight
                     underlayColor="#333"
                     onPress={() => {
-
+                        setShowSearch(!showSearch)
+                        focusTextInput();
                     }}
                     style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
                     <Image source={searchIcon} style={[common.icon, {}]}></Image>
@@ -88,8 +125,30 @@ export default function Detail({ route, navigation }) {
                     <Image source={helpIcon} style={[common.icon, {}]}></Image>
                 </TouchableHighlight>
 
+                <TouchableHighlight
+                    underlayColor="#333"
+                    onPress={() => {
+                        clearHistory()
+                    }}>
+                    <Text style={[common.text, { padding: 10 }]}>초기화</Text>
+                </TouchableHighlight>
+            </View>
 
+            {showSearch &&
+                <View style={[common.fxr, { width: '100%', alignItems: 'center', justifyContent: 'center', padding: 10 }]}>
+                    <TextInputLine placeholder={'검색어를 입력하세요'} value={searchWord} set={setSearchWord} forRef={searchInputRef}></TextInputLine>
+                    <TouchableHighlight
+                        underlayColor="#333"
+                        onPress={() => {
+                            searchHis()
+                        }}
+                        style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                        <Image source={searchIcon} style={[common.icon, {}]}></Image>
+                    </TouchableHighlight>
+                </View>}
 
+            <View>
+                <Text style={[common.text, { color: 'gray' }]}>총 기록 개수 {items == undefined ? 0 : items.length}개</Text>
             </View>
 
             <ScrollView style={[common.e, { width: '100%', padding: 10 }]}>
