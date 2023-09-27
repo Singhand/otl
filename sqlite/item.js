@@ -29,7 +29,7 @@ export function init(folder, dispatch) {
     db.transaction(tx => {
         tx.executeSql(`select * from items where folderId=? order by itemOrder`, [folder],
             (txObj, rs) => {
-                console.log('init success');
+                console.log('item init success');
                 let items = [];
                 for (var i = 0; i < rs.rows.length; i += 1) {
                     items.push(rs.rows.item(i));
@@ -47,6 +47,7 @@ export function add(title, folder, dispatch) {
         let date = new Date();
         tx.executeSql(`insert into items (folderId, title, itemOrder) values(?,?,?)`, [folder, title, date.getTime()],
             (txObj, rs) => {
+                // 기본 퀵 액션 동시 추가 - rs.insertId 이용
                 txObj.executeSql(`insert into quicks (itemId, title, type, itemOrder) values(?,?,?,?)`, [rs.insertId, "기록", 1, date.getTime()],
                     (txObj2, rs) => {
                         console.log(`default quick action created`)
@@ -54,12 +55,6 @@ export function add(title, folder, dispatch) {
                     (txObj2, err) => { console.log(err); });
             },
             (txObj, err) => { console.log(err); });
-
-        //Quick Action
-        // tx.executeSql(`insert into quicks (itemId, title, type, itemOrder) values(?,?,?,?)`, [1, title, 1, date.getTime()],
-        //     (txObj, rs) => {
-        //     },
-        //     (txObj, err) => { console.log(err); });
     }, (err) => { console.log(err); },
 
         () => {
@@ -83,13 +78,22 @@ export function edit(id, title, folder, dispatch) {
 
 export function remove(id, folder, dispatch) {
     db.transaction(tx => {
+        // 아이템 삭제, 기록 삭제, 퀵 삭제
         tx.executeSql(`delete from items where id=?`, [id],
             (txObj, rs) => {
-                console.log('delete success');
-                init(folder, dispatch);
+                txObj.executeSql(`delete from history where itemId=?`, [id],
+                    (txObj2, rs2) => {
+                        txObj2.executeSql(`delete from quicks where itemId=?`, [id], (txObj3, rs3) => {
+                        }, (txObj3, err3) => { console.log(err3) })
+                    },
+                    (txObj2, err2) => { console.log(err2) })
             },
-            (txObj, err) => { console.log(err); });
-    });
+            (txObj, err) => { console.log(err) });
+    }, (err) => { console.log(err); },
+        () => {
+            console.log('delete success');
+            init(folder, dispatch);
+        });
 }
 
 export function updateOrder(items, folder, dispatch) {

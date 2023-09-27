@@ -21,7 +21,6 @@ export function create(params) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS folders (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, opened INTEGER default 1, itemOrder INTEGER);', null,
             (txObj, rs) => { console.log('create success'); },
             (txObj, err) => { console.log(err); });
-
     });
 }
 
@@ -29,7 +28,6 @@ export function init(dispatch) {
     db.transaction(tx => {
         tx.executeSql(`select * from folders order by itemOrder`, null,
             (txObj, rs) => {
-                console.log('init success');
                 let items = [];
                 for (var i = 0; i < rs.rows.length; i += 1) {
                     items.push(rs.rows.item(i));
@@ -71,13 +69,59 @@ export function edit(id, title, dispatch) {
 
 export function remove(id, dispatch) {
     db.transaction(tx => {
-        tx.executeSql(`delete from folders where id=?`, [id],
+        // 폴더 아이템 로드
+        // 아이템 별 기록, 퀵 삭제 - loop
+        // 아이템 삭제
+        // 폴더 삭제
+
+        tx.executeSql(`select * from items where folderId=?`, [id],
             (txObj, rs) => {
-                console.log('delete success');
-                init(dispatch);
+                console.log('item load success');
+                let idcs = 0 // item delete completely success
+                const len = rs.rows.length
+                for (var i = 0; i < len; i += 1) {
+                    let itemId = rs.rows.item(i).id
+
+                    txObj.executeSql(`delete from history where itemId=?`, [itemId],
+                        (txObj, rs) => {
+                            console.log('item his deleted', itemId)
+                            txObj.executeSql(`delete from quicks where itemId=?`, [itemId],
+                                (txObj2, rs2) => {
+                                    console.log('item quick deleted', itemId)
+                                    txObj2.executeSql(`delete from items where id=?`, [itemId],
+                                        (txObj3, rs3) => {
+                                            console.log('item deleted', itemId)
+                                            idcs += 1
+                                            if (idcs == len) {
+                                                console.log(201)
+                                                txObj3.executeSql(`delete from folders where id=?`, [id],
+                                                    (txObj, rs) => {
+                                                    },
+                                                    (txObj, err) => { console.log(err); });
+
+                                            }
+                                        }, (txObj3, err3) => { console.log(err3) })
+                                },
+                                (txObj2, err2) => { console.log(err2) })
+                        },
+                        (txObj, err) => { console.log(err) });
+                }
+
+                if (len == 0) {
+                    txObj.executeSql(`delete from folders where id=?`, [id],
+                        (txObj, rs) => {
+                        },
+                        (txObj, err) => { console.log(err); });
+                }
             },
             (txObj, err) => { console.log(err); });
-    });
+
+
+    }, (err) => { console.log(err); },
+        () => {
+            console.log('delete folder success');
+            init(dispatch);
+        });
 }
 
 export function updateOrder(folders, dispatch) {

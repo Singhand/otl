@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, Pressable, Image, TouchableHighlight, ScrollView, TextInput, Alert } from 'react-native'
-import React, { useEffect, useState, useMemo, useRef } from 'react'
+import { StyleSheet, Text, View, Pressable, Image, TouchableHighlight, ScrollView, TextInput, Alert, BackHandler } from 'react-native'
+import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
+import { useFocusEffect } from '@react-navigation/native';
 
 import { common, colors } from '../style';
 
@@ -12,10 +13,10 @@ import AddQuickModal from './AddQuickModal';
 import EditQuickModal from './EditQuickModal';
 import TextInputLine from './TextInputLine';
 
-import backIcon from '../assets/imgs/back.svg'
-import helpIcon from '../assets/imgs/help.svg'
-import searchIcon from '../assets/imgs/search.svg'
-import addIcon from '../assets/imgs/add.svg'
+import backIcon from '../assets/imgs/back.png'
+import helpIcon from '../assets/imgs/help.png'
+import searchIcon from '../assets/imgs/search.png'
+import addIcon from '../assets/imgs/add.png'
 
 import * as HistoryDAO from '../sqlite/history';
 import * as QuickDAO from '../sqlite/quick';
@@ -46,6 +47,33 @@ export default function Detail({ route, navigation }) {
         HistoryDAO.setSearchWord('')
         HistoryDAO.init(itemId, dispatch)
     }, []);
+
+    // 뒤로가기 버튼 제어
+    useFocusEffect(
+        useCallback(() => {
+            console.log('usecallback')
+            const onBackPress = () => {
+                console.log('back pressed')
+                if (showAddQuick) {
+                    setShowAddQuick(false)
+                    return true;
+                } else if (showEditQuick) {
+                    setShowEditQuick(false)
+                    return true;
+                } else if (showEditHistory) {
+                    setShowEditHistory(false)
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            };
+
+            const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+            return () => subscription.remove();
+        }, [showAddQuick, showEditHistory, showEditQuick])
+    );
 
     function focusTextInput() {
         setTimeout(() => {
@@ -80,12 +108,12 @@ export default function Detail({ route, navigation }) {
             {
                 text: '삭제', onPress: () => {
                     console.log('OK Pressed');
+                    HistoryDAO.clear(itemId, dispatch)
 
                 }, style: 'destructive',
             },
         ]);
 
-        HistoryDAO.clear(itemId, dispatch)
     }
 
     const iter = Array(20).fill(null);

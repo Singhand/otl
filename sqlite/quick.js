@@ -28,7 +28,7 @@ export function init(item, dispatch) {
     db.transaction(tx => {
         tx.executeSql(`select * from quicks where itemId=? order by itemOrder`, [item],
             (txObj, rs) => {
-                console.log('init success');
+                console.log('quick init success');
                 let items = [];
                 for (var i = 0; i < rs.rows.length; i += 1) {
                     items.push(rs.rows.item(i));

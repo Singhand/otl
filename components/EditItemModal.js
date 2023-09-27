@@ -39,9 +39,6 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                 }, style: 'destructive',
             },
         ]);
-
-        ItemDAO.remove(items[itemIdx].id, folderId, dispatch);
-        show(false);
     }
 
     function move(parameter) {

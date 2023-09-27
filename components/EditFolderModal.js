@@ -37,9 +37,6 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                 }, style: 'destructive',
             },
         ]);
-
-        FolderDAO.remove(folder.id, dispatch);
-        setShow(false);
     }
 
     function move(parameter) {

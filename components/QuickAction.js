@@ -21,14 +21,14 @@ export default function QuickAction({ item }) {
     }
 
     return (
-        <View style={[common.fxr, { paddingVertical: 5 }]}>
-            <Text style={[common.text, { color: 'gray' }]}>└  </Text>
+        <View style={[common.fxr, {}]}>
+            <Text style={[common.text, { color: 'gray', paddingVertical: 5 }]}>└ </Text>
             <TouchableHighlight
                 underlayColor="#333"
                 onPress={() => {
                     add();
                 }}>
-                <Text style={[common.text, {}]}>{item.title}</Text>
+                <Text style={[common.text, { padding: 5 }]}>{item.title}</Text>
             </TouchableHighlight>
         </View>
     )

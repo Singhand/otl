@@ -1,6 +1,6 @@
-import { StyleSheet, Text, PixelRatio, View, Pressable, ScrollView, Button, TouchableHighlight } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState, useMemo } from 'react'
+import { StyleSheet, Text, PixelRatio, View, Pressable, ScrollView, Button, TouchableHighlight, Image, BackHandler } from 'react-native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,6 +14,7 @@ import AddFolderModal from './AddFolderModal';
 import EditFolderModal from './EditFolderModal';
 import AddItemModal from './AddItemModal';
 import EditItemModal from './EditItemModal';
+
 
 export default function Home() {
     const navigation = useNavigation();
@@ -38,6 +39,36 @@ export default function Home() {
         console.log('useEffect-Home');
         FolderDAO.init(dispatch);
     }, []);
+
+    // 뒤로가기 버튼 제어
+    useFocusEffect(
+        useCallback(() => {
+            console.log('usecallback')
+            const onBackPress = () => {
+                console.log('back pressed')
+                if (showAdd) {
+                    setShowAdd(false)
+                    return true;
+                } else if (showEdit) {
+                    setShowEdit(false)
+                    return true;
+                } else if (showAddItem) {
+                    setShowAddItem(false)
+                    return true;
+                } else if (showEditItem) {
+                    setShowEditItem(false)
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            };
+
+            const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+            return () => subscription.remove();
+        }, [showAdd, showEdit, showAddItem, showEditItem])
+    );
 
     // 폴더 추가
     function add(title) {
