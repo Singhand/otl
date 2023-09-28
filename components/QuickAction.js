@@ -2,9 +2,13 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
-import { common } from '../style';
+import { common, text } from '../style';
+
+import { showQuickType2Modal, setQuickItem } from '../redux/slices/user'
 
 import * as HistoryDAO from '../sqlite/history';
+
+import Toast from 'react-native-root-toast';
 
 
 export default function QuickAction({ item }) {
@@ -15,9 +19,37 @@ export default function QuickAction({ item }) {
         if (item.type == 1) {
             // 고정 텍스트
             HistoryDAO.add(item.itemId, item.title, dispatch);
+            toast()
         } else if (item.type == 2) {
             // 직접 입력
+            dispatch(showQuickType2Modal(true))
+            dispatch(setQuickItem(item))
         }
+    }
+
+    function toast() {
+        // Add a Toast on screen.
+        let toast = Toast.show(text.historySaved, {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            backgroundColor: '#222',
+            delay: 0,
+            onShow: () => {
+                // calls on toast\`s appear animation start
+            },
+            onShown: () => {
+                // calls on toast\`s appear animation end.
+            },
+            onHide: () => {
+                // calls on toast\`s hide animation start.
+            },
+            onHidden: () => {
+                // calls on toast\`s hide animation end.
+            }
+        });
     }
 
     return (

@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import * as FolderDAO from '../sqlite/folder';
 import * as ItemDAO from '../sqlite/item';
 
+import { showQuickType2Modal, setQuickItem } from '../redux/slices/user'
+
+
 import getFontSize from '../utils/getFontSize';
 
 import Folder from './Folder';
@@ -14,11 +17,11 @@ import AddFolderModal from './AddFolderModal';
 import EditFolderModal from './EditFolderModal';
 import AddItemModal from './AddItemModal';
 import EditItemModal from './EditItemModal';
+import QuickType2Modal from './QuickType2Modal';
 
 
 export default function Home() {
     const navigation = useNavigation();
-
     // state
     let [page, setPage] = useState(0);
     const [showAdd, setShowAdd] = useState(false);
@@ -34,6 +37,7 @@ export default function Home() {
     // Redux
     const dispatch = useDispatch();
     let folders = useSelector(state => state.folder.folders);
+    let isShowQuickType2Modal = useSelector(state => state.user.quickType2Modal);
 
     useEffect(() => {
         console.log('useEffect-Home');
@@ -58,8 +62,10 @@ export default function Home() {
                 } else if (showEditItem) {
                     setShowEditItem(false)
                     return true;
-                }
-                else {
+                } else if (isShowQuickType2Modal) {
+                    dispatch(showQuickType2Modal(false))
+                    return true;
+                } else {
                     return false;
                 }
             };
@@ -67,7 +73,7 @@ export default function Home() {
             const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
             return () => subscription.remove();
-        }, [showAdd, showEdit, showAddItem, showEditItem])
+        }, [showAdd, showEdit, showAddItem, showEditItem, isShowQuickType2Modal])
     );
 
     // 폴더 추가
@@ -163,7 +169,7 @@ export default function Home() {
             {showEdit && <EditFolderModal idx={selected} folder={folders[selected]} setShow={setShowEdit}></EditFolderModal>}
             {showAddItem && <AddItemModal add={addItem} show={setShowAddItem}></AddItemModal>}
             {showEditItem && <EditItemModal item={item} folderId={folders[selected].id} itemIdx={selectedItem} show={setShowEditItem}></EditItemModal>}
-
+            {isShowQuickType2Modal && <QuickType2Modal></QuickType2Modal>}
         </View >
     );
 }

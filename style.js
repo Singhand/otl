@@ -13,6 +13,10 @@ export const size = {
     round: 10
 }
 
+export const text = {
+    historySaved: '기록되었습니다'
+}
+
 export const common = StyleSheet.create({
     bg: {
 

@@ -7,14 +7,15 @@ export const userSlice = createSlice({
         quickItem: null,
     },
     reducers: {
-        modifyByValue: (state, action) => {
-            console.log(action);
-            // state.money += action.payload.value;
-            state.money += 1;
+        showQuickType2Modal: (state, action) => {
+            state.quickType2Modal = action.payload
+        },
+        setQuickItem: (state, action) => {
+            state.quickItem = action.payload
         },
     },
 });
 
-export const { modifyByValue } = userSlice.actions;
+export const { showQuickType2Modal, setQuickItem } = userSlice.actions;
 
 export default userSlice.reducer;
