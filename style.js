@@ -14,7 +14,8 @@ export const size = {
 }
 
 export const text = {
-    historySaved: '기록되었습니다'
+    historySaved: '기록되었습니다',
+    backup: '데이터를 내보냈습니다',
 }
 
 export const common = StyleSheet.create({
@@ -45,6 +46,7 @@ export const common = StyleSheet.create({
 
     // Modal
     modalBg: {
+        zIndex: 10,
         position: 'absolute',
         width: '100%',
         height: '100%',

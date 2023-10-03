@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { common, text } from '../style';
 
-import { showQuickType2Modal, setQuickItem } from '../redux/slices/user'
+import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/user'
 
 import * as HistoryDAO from '../sqlite/history';
 
@@ -18,13 +18,21 @@ export default function QuickAction({ item }) {
     function add(params) {
         if (item.type == 1) {
             // 고정 텍스트
-            HistoryDAO.add(item.itemId, item.title, dispatch);
-            toast()
+            setAd()
         } else if (item.type == 2) {
             // 직접 입력
             dispatch(showQuickType2Modal(true))
             dispatch(setQuickItem(item))
         }
+    }
+
+    function setAd(params) {
+        dispatch(showAdModal(true))
+        setTimeout(() => {
+            HistoryDAO.add(item.itemId, item.title, dispatch);
+            dispatch(showAdModal(false))
+            toast()
+        }, 5000);
     }
 
     function toast() {

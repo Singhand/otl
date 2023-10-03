@@ -1,7 +1,5 @@
-import * as SQLite from 'expo-sqlite';
 import { load } from '../redux/slices/history';
-
-const db = SQLite.openDatabase('main.db');
+import { db } from './database'
 let searchWord = ''
 
 // drop();

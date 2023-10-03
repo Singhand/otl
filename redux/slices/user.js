@@ -5,6 +5,7 @@ export const userSlice = createSlice({
     initialState: {
         quickType2Modal: false,
         quickItem: null,
+        adModal: false,
     },
     reducers: {
         showQuickType2Modal: (state, action) => {
@@ -13,9 +14,12 @@ export const userSlice = createSlice({
         setQuickItem: (state, action) => {
             state.quickItem = action.payload
         },
+        showAdModal: (state, action) => {
+            state.adModal = action.payload
+        },
     },
 });
 
-export const { showQuickType2Modal, setQuickItem } = userSlice.actions;
+export const { showQuickType2Modal, setQuickItem, showAdModal } = userSlice.actions;
 
 export default userSlice.reducer;

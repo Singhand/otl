@@ -1,4 +1,4 @@
-import { StyleSheet, Text, PixelRatio, View, Pressable, ScrollView, Button, TouchableHighlight, Image, BackHandler } from 'react-native'
+import { StyleSheet, Text, PixelRatio, View, Pressable, ScrollView, Button, TouchableHighlight, Image, BackHandler, Platform } from 'react-native'
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 
@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import * as FolderDAO from '../sqlite/folder';
 import * as ItemDAO from '../sqlite/item';
 
-import { showQuickType2Modal, setQuickItem } from '../redux/slices/user'
-
+import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/user'
 
 import getFontSize from '../utils/getFontSize';
+import { common, colors } from '../style';
 
 import Folder from './Folder';
 import AddFolderModal from './AddFolderModal';
@@ -18,7 +18,12 @@ import EditFolderModal from './EditFolderModal';
 import AddItemModal from './AddItemModal';
 import EditItemModal from './EditItemModal';
 import QuickType2Modal from './QuickType2Modal';
+import HelpHomeModal from './HelpHomeModal';
+import SettingModal from './SettingModal';
+import AdModal from './AdModal';
 
+import helpIcon from '../assets/imgs/help.png'
+import settingIcon from '../assets/imgs/settings.png'
 
 export default function Home() {
     const navigation = useNavigation();
@@ -34,10 +39,14 @@ export default function Home() {
 
     const [item, setItem] = useState(0)
 
+    const [showHelp, setShowHelp] = useState(false)
+    const [showSetting, setShowSetting] = useState(false)
+
     // Redux
     const dispatch = useDispatch();
     let folders = useSelector(state => state.folder.folders);
     let isShowQuickType2Modal = useSelector(state => state.user.quickType2Modal);
+    let adModal = useSelector(state => state.user.adModal);
 
     useEffect(() => {
         console.log('useEffect-Home');
@@ -65,6 +74,14 @@ export default function Home() {
                 } else if (isShowQuickType2Modal) {
                     dispatch(showQuickType2Modal(false))
                     return true;
+                } else if (showHelp) {
+                    setShowHelp(false)
+                    return true;
+                } else if (showSetting) {
+                    setShowSetting(false)
+                    return true;
+                } else if (adModal) {
+                    return true;
                 } else {
                     return false;
                 }
@@ -73,7 +90,7 @@ export default function Home() {
             const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
             return () => subscription.remove();
-        }, [showAdd, showEdit, showAddItem, showEditItem, isShowQuickType2Modal])
+        }, [showAdd, showEdit, showAddItem, showEditItem, isShowQuickType2Modal, showHelp, showSetting, adModal])
     );
 
     // 폴더 추가
@@ -86,8 +103,36 @@ export default function Home() {
         ItemDAO.add(title, folders[selected].id, dispatch);
     }
 
+    function reloadApp(params) {
+        navigation.replace('Home', null);
+    }
+
+
     return (
         <View style={{ backgroundColor: '#222', flex: 1, color: '#fff' }}>
+            <View style={[styles.fdr, {
+                width: '100%', position: 'absolute', zIndex: 1, bottom: 0, right: 0,
+                alignItems: 'center', justifyContent: 'flex-end', padding: 10
+            }]}>
+                <TouchableHighlight
+                    underlayColor="#333"
+                    onPress={() => {
+                        setShowHelp(true)
+                    }}
+                    style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                    <Image source={helpIcon} style={[common.icon, {}]}></Image>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                    underlayColor="#333"
+                    onPress={() => {
+                        setShowSetting(true)
+                    }}
+                    style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                    <Image source={settingIcon} style={[common.icon, {}]}></Image>
+                </TouchableHighlight>
+
+            </View>
             <View style={[styles.fdr, styles.folderCtn, {
 
             }]}>
@@ -170,6 +215,9 @@ export default function Home() {
             {showAddItem && <AddItemModal add={addItem} show={setShowAddItem}></AddItemModal>}
             {showEditItem && <EditItemModal item={item} folderId={folders[selected].id} itemIdx={selectedItem} show={setShowEditItem}></EditItemModal>}
             {isShowQuickType2Modal && <QuickType2Modal></QuickType2Modal>}
+            {showHelp && <HelpHomeModal show={setShowHelp}></HelpHomeModal>}
+            {showSetting && <SettingModal show={setShowSetting} reload={reloadApp}></SettingModal>}
+            {adModal && <AdModal></AdModal>}
         </View >
     );
 }

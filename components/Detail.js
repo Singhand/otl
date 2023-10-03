@@ -12,6 +12,7 @@ import ModalButton from './ModalButton';
 import AddQuickModal from './AddQuickModal';
 import EditQuickModal from './EditQuickModal';
 import TextInputLine from './TextInputLine';
+import HelpDetailModal from './HelpDetailModal';
 
 import backIcon from '../assets/imgs/back.png'
 import helpIcon from '../assets/imgs/help.png'
@@ -32,6 +33,7 @@ export default function Detail({ route, navigation }) {
     const [showEditQuick, setShowEditQuick] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
     const [searchWord, setSearchWord] = useState('')
+    const [showHelp, setShowHelp] = useState(false)
 
     // ref
     const searchInputRef = useRef(null);
@@ -63,6 +65,9 @@ export default function Detail({ route, navigation }) {
                 } else if (showEditHistory) {
                     setShowEditHistory(false)
                     return true;
+                } else if (showHelp) {
+                    setShowHelp(false)
+                    return true;
                 }
                 else {
                     return false;
@@ -72,7 +77,7 @@ export default function Detail({ route, navigation }) {
             const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
             return () => subscription.remove();
-        }, [showAddQuick, showEditHistory, showEditQuick])
+        }, [showAddQuick, showEditHistory, showEditQuick, showHelp])
     );
 
     function focusTextInput() {
@@ -147,7 +152,7 @@ export default function Detail({ route, navigation }) {
                 <TouchableHighlight
                     underlayColor="#333"
                     onPress={() => {
-
+                        setShowHelp(true)
                     }}
                     style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
                     <Image source={helpIcon} style={[common.icon, {}]}></Image>
@@ -211,6 +216,7 @@ export default function Detail({ route, navigation }) {
             {showEditHistory && <EditHistoryModal show={setShowEditHistory} item={selectHis}></EditHistoryModal>}
             {showAddQuick && <AddQuickModal show={setShowAddQuick} itemId={itemId}></AddQuickModal>}
             {showEditQuick && <EditQuickModal item={quicks[selectQuickIdx]} idx={selectQuickIdx} show={setShowEditQuick}></EditQuickModal>}
+            {showHelp && <HelpDetailModal show={setShowHelp}></HelpDetailModal>}
         </View>
     );
 }

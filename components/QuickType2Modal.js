@@ -6,7 +6,7 @@ import getFontSize from '../utils/getFontSize'
 
 import { common, text } from '../style';
 
-import { showQuickType2Modal, setQuickItem } from '../redux/slices/user'
+import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/user'
 
 import Toast from 'react-native-root-toast';
 import TextInputLine from './TextInputLine';
@@ -26,8 +26,16 @@ export default function QuickType2Modal({ }) {
     }
 
     function add(content) {
-        HistoryDAO.add(item.itemId, content, dispatch)
-        toast()
+        setAd()
+    }
+
+    function setAd(params) {
+        dispatch(showAdModal(true))
+        setTimeout(() => {
+            dispatch(showAdModal(false))
+            HistoryDAO.add(item.itemId, content, dispatch)
+            toast()
+        }, 5000);
     }
 
     function toast() {
