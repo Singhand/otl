@@ -10,6 +10,7 @@ import TextInputLine from './TextInputLine';
 import * as FolderDAO from '../sqlite/folder';
 
 import { common } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 
 export default function EditFolderModal({ idx, folder, setShow }) {
     let [title, setTitle] = useState(folder.title);
@@ -90,7 +91,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
 
     return (
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
-            <View style={[common.modal, {}]}>
+            <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
                     <Text style={[common.text, { fontWeight: 'bold', }]}>폴더 수정</Text>
                 </View>
@@ -100,7 +101,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             move(2);
                             setShow(false);
@@ -110,7 +111,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             move(4);
                             setShow(false);
@@ -120,7 +121,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             move(1);
                             setShow(false);
@@ -130,7 +131,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             move(3);
                             setShow(false);
@@ -142,7 +143,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             setShow(false);
                         }}>
@@ -151,7 +152,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             remove();
                         }}>
@@ -160,7 +161,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             if (title.length > 0 && title.length <= 100) {
                                 edit();

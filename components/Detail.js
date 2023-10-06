@@ -4,7 +4,8 @@ import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { useFocusEffect } from '@react-navigation/native';
 
-import { common, colors } from '../style';
+import { common } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 
 import History from './History';
 import EditHistoryModal from './EditHistoryModal';
@@ -123,11 +124,11 @@ export default function Detail({ route, navigation }) {
 
     const iter = Array(20).fill(null);
     return (
-        <View style={{ backgroundColor: '#222', flex: 1, alignItems: 'center' }}>
+        <View style={{ backgroundColor: appThemeColor.bg, flex: 1, alignItems: 'center' }}>
 
             <View style={[common.fxr, { width: '100%', alignItems: 'center', padding: 10 }]}>
                 <TouchableHighlight
-                    underlayColor="#333"
+                    underlayColor={appThemeColor.buttonClk}
                     onPress={() => {
                         navigation.goBack()
                     }}
@@ -140,7 +141,7 @@ export default function Detail({ route, navigation }) {
                 </View>
 
                 <TouchableHighlight
-                    underlayColor="#333"
+                    underlayColor={appThemeColor.buttonClk}
                     onPress={() => {
                         setShowSearch(!showSearch)
                         focusTextInput();
@@ -150,7 +151,7 @@ export default function Detail({ route, navigation }) {
                 </TouchableHighlight>
 
                 <TouchableHighlight
-                    underlayColor="#333"
+                    underlayColor={appThemeColor.buttonClk}
                     onPress={() => {
                         setShowHelp(true)
                     }}
@@ -159,7 +160,7 @@ export default function Detail({ route, navigation }) {
                 </TouchableHighlight>
 
                 <TouchableHighlight
-                    underlayColor="#333"
+                    underlayColor={appThemeColor.buttonClk}
                     onPress={() => {
                         clearHistory()
                     }}>
@@ -171,7 +172,7 @@ export default function Detail({ route, navigation }) {
                 <View style={[common.fxr, { width: '100%', alignItems: 'center', justifyContent: 'center', padding: 10 }]}>
                     <TextInputLine placeholder={'검색어를 입력하세요'} value={searchWord} set={setSearchWord} forRef={searchInputRef}></TextInputLine>
                     <TouchableHighlight
-                        underlayColor="#333"
+                        underlayColor={appThemeColor.buttonClk}
                         onPress={() => {
                             searchHis()
                         }}
@@ -190,12 +191,12 @@ export default function Detail({ route, navigation }) {
                 ))}
             </ScrollView>
 
-            <View style={[common.topRound, { width: '100%', backgroundColor: colors.modal, padding: 10 }]}>
+            <View style={[common.topRound, { width: '100%', backgroundColor: appThemeColor.modal, padding: 10 }]}>
                 <View style={[common.fxr, { alignItems: 'center' }]}>
                     <Text style={[common.text, { flex: 1, fontSize: 20 }]}>빠른 기록 관리</Text>
 
                     <TouchableHighlight
-                        underlayColor="#555"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             setShowAddQuick(true);
                         }}

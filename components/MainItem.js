@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as QuickDAO from '../sqlite/quick';
 
 import { common } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 
 import QuickAction from './QuickAction';
 
@@ -26,7 +27,7 @@ export default function MainItem({ idx, item, click }) {
     return (
         <View style={[styles.ctn, {}]}>
             <TouchableHighlight
-                underlayColor="#333"
+                underlayColor={appThemeColor.buttonClk}
                 onPress={() => {
                     navigation.navigate('Details', {
                         itemId: item.id
@@ -36,7 +37,7 @@ export default function MainItem({ idx, item, click }) {
                     click(idx)
                 }}>
                 <View>
-                    <Text style={[common.text, { color: '#fff', fontSize: getFontSize(18), paddingVertical: getFontSize(5) }]}>{item.title}</Text>
+                    <Text style={[common.text, { fontSize: getFontSize(18), paddingVertical: getFontSize(5) }]}>{item.title}</Text>
                 </View>
             </TouchableHighlight>
 

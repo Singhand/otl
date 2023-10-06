@@ -6,11 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as FolderDAO from '../sqlite/folder';
 import * as ItemDAO from '../sqlite/item';
+import * as UserDAO from '../sqlite/user';
 
 import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/user'
 
 import getFontSize from '../utils/getFontSize';
-import { common, colors } from '../style';
+import { appThemeColor, appLang, setTheme, setLang } from '../utils/appSetting'
+import { common, colors, lightColors } from '../style';
 
 import Folder from './Folder';
 import AddFolderModal from './AddFolderModal';
@@ -21,6 +23,7 @@ import QuickType2Modal from './QuickType2Modal';
 import HelpHomeModal from './HelpHomeModal';
 import SettingModal from './SettingModal';
 import AdModal from './AdModal';
+// import MyAdBanner from './MyAdBanner';
 
 import helpIcon from '../assets/imgs/help.png'
 import settingIcon from '../assets/imgs/settings.png'
@@ -47,10 +50,16 @@ export default function Home() {
     let folders = useSelector(state => state.folder.folders);
     let isShowQuickType2Modal = useSelector(state => state.user.quickType2Modal);
     let adModal = useSelector(state => state.user.adModal);
+    let appTheme = useSelector(state => state.user.theme);
+    let appLang = useSelector(state => state.user.lang);
+
+    // 앱 테마, 언어 스타일
+    setTheme((appTheme == 0) ? colors : lightColors);
 
     useEffect(() => {
         console.log('useEffect-Home');
         FolderDAO.init(dispatch);
+        UserDAO.initSetting(dispatch);
     }, []);
 
     // 뒤로가기 버튼 제어
@@ -107,32 +116,9 @@ export default function Home() {
         navigation.replace('Home', null);
     }
 
-
     return (
-        <View style={{ backgroundColor: '#222', flex: 1, color: '#fff' }}>
-            <View style={[styles.fdr, {
-                width: '100%', position: 'absolute', zIndex: 1, bottom: 0, right: 0,
-                alignItems: 'center', justifyContent: 'flex-end', padding: 10
-            }]}>
-                <TouchableHighlight
-                    underlayColor="#333"
-                    onPress={() => {
-                        setShowHelp(true)
-                    }}
-                    style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
-                    <Image source={helpIcon} style={[common.icon, {}]}></Image>
-                </TouchableHighlight>
+        <View style={{ backgroundColor: appThemeColor.bg, flex: 1, color: '#fff' }}>
 
-                <TouchableHighlight
-                    underlayColor="#333"
-                    onPress={() => {
-                        setShowSetting(true)
-                    }}
-                    style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
-                    <Image source={settingIcon} style={[common.icon, {}]}></Image>
-                </TouchableHighlight>
-
-            </View>
             <View style={[styles.fdr, styles.folderCtn, {
 
             }]}>
@@ -145,7 +131,7 @@ export default function Home() {
 
                     {(folders.length == (page * 4)) &&
                         <TouchableHighlight
-                            underlayColor="#333"
+                            underlayColor={appThemeColor.buttonClk}
                             onPress={() => {
                                 setShowAdd(true);
                             }}>
@@ -164,7 +150,7 @@ export default function Home() {
 
                     {(folders.length == (page * 4) + 1) &&
                         <TouchableHighlight
-                            underlayColor="#333"
+                            underlayColor={appThemeColor.buttonClk}
                             onPress={() => {
                                 setShowAdd(true);
                             }}>
@@ -184,7 +170,7 @@ export default function Home() {
 
                     {(folders.length == (page * 4) + 2) &&
                         <TouchableHighlight
-                            underlayColor="#333"
+                            underlayColor={appThemeColor.buttonClk}
                             onPress={() => {
                                 setShowAdd(true);
                             }}>
@@ -201,7 +187,7 @@ export default function Home() {
 
                     {(folders.length == (page * 4) + 3) &&
                         <TouchableHighlight
-                            underlayColor="#333"
+                            underlayColor={appThemeColor.buttonClk}
                             onPress={() => {
                                 setShowAdd(true);
                             }}>
@@ -209,6 +195,33 @@ export default function Home() {
                         </TouchableHighlight>}
                 </View>
             </View>
+
+            <View style={[styles.fdr, {
+                width: '100%', zIndex: 1, position: 'absolute', right: 0, bottom: 0,
+                alignItems: 'center', justifyContent: 'flex-end', padding: 10
+            }]}>
+                <TouchableHighlight
+                    underlayColor={appThemeColor.buttonClk}
+                    onPress={() => {
+                        setShowHelp(true)
+                    }}
+                    style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                    <Image source={helpIcon} style={[common.icon, {}]}></Image>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                    underlayColor={appThemeColor.buttonClk}
+                    onPress={() => {
+                        setShowSetting(true)
+                    }}
+                    style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                    <Image source={settingIcon} style={[common.icon, {}]}></Image>
+                </TouchableHighlight>
+
+            </View>
+
+            {/* <MyAdBanner></MyAdBanner> */}
+
 
             {showAdd && <AddFolderModal add={add} setShowAdd={setShowAdd}></AddFolderModal>}
             {showEdit && <EditFolderModal idx={selected} folder={folders[selected]} setShow={setShowEdit}></EditFolderModal>}
@@ -233,7 +246,7 @@ const styles = StyleSheet.create({
     },
     folderCtn: {
         width: '100%',
-        height: '50%',
+        height: '45%',
     },
     folder: {
         width: '50%',
@@ -256,6 +269,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#888',
         width: '100%',
         height: getFontSize(1),
-    }
+    },
+
 })
 

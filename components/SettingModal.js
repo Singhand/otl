@@ -1,16 +1,24 @@
 import { StyleSheet, Text, View, TouchableHighlight, Alert } from 'react-native'
 import React, { useState } from 'react'
-import { common, colors, text } from '../style';
+import { common, text } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 import * as Sharing from 'expo-sharing'
 import * as FileSystem from 'expo-file-system'
 import * as DocPick from 'expo-document-picker'
 import { close, open } from '../sqlite/database'
+import { useDispatch, useSelector } from "react-redux";
 
 import ModalButton from './ModalButton';
 
 import Toast from 'react-native-root-toast';
 
+import * as UserDAO from '../sqlite/user';
+
 export default function SettingModal({ show, reload }) {
+    // Redux
+    const dispatch = useDispatch();
+    let appTheme = useSelector(state => state.user.theme);
+    let appLang = useSelector(state => state.user.lang);
 
     // 백업
     async function exportDb(params) {
@@ -83,6 +91,16 @@ export default function SettingModal({ show, reload }) {
         }
     }
 
+    function changeTheme(params) {
+        UserDAO.updateTheme(appTheme == 0 ? 1 : 0, dispatch)
+        show(false)
+    }
+
+    function changeLang(params) {
+        UserDAO.updateLang(appLang == 0 ? 1 : 0, dispatch)
+        show(false)
+    }
+
     function toast() {
         // Add a Toast on screen.
         let toast = Toast.show(text.backup, {
@@ -110,7 +128,7 @@ export default function SettingModal({ show, reload }) {
 
     return (
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
-            <View style={[common.modal, {}]}>
+            <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row', marginBottom: 10 }]}>
                     <Text style={[common.text, { fontWeight: 'bold', }]}>설정</Text>
                 </View>
@@ -118,10 +136,14 @@ export default function SettingModal({ show, reload }) {
                 <ModalButton text={'데이터 내보내기'} idx={1} click={exportDb}> </ModalButton>
                 <View style={[styles.w, { height: 10 }]}></View>
                 <ModalButton text='데이터 가져오기' idx={2} click={importDb}> </ModalButton>
+                <View style={[styles.w, { height: 10 }]}></View>
+                <ModalButton text='다크모드 / 라이트모드' idx={3} click={changeTheme}> </ModalButton>
+                <View style={[styles.w, { height: 10 }]}></View>
+                <ModalButton text='한국어 / English' idx={4} click={changeLang}> </ModalButton>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 }]}>
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             show(false);
                         }}>

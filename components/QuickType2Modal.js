@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import getFontSize from '../utils/getFontSize'
 
 import { common, text } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 
 import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/user'
 
@@ -65,7 +66,7 @@ export default function QuickType2Modal({ }) {
 
     return (
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
-            <View style={[common.modal, {}]}>
+            <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
                     <Text style={[common.text, { fontWeight: 'bold', }]}>기록 추가</Text>
                 </View>
@@ -75,7 +76,7 @@ export default function QuickType2Modal({ }) {
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             show(false);
                         }}>
@@ -84,7 +85,7 @@ export default function QuickType2Modal({ }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             if (content.length > 0 && content.length <= 100) {
                                 add(content);

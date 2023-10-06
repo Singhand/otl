@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { common, colors } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 import getFontSize from '../utils/getFontSize'
 
 import ModalButton from './ModalButton';
@@ -43,7 +44,7 @@ export default function AddQuickModal({ show, click, itemId }) {
 
     return (
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
-            <View style={[common.modal, {}]}>
+            <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row', marginBottom: 10 }]}>
                     <Text style={[common.text, { fontWeight: 'bold', }]}>빠른 기록 추가</Text>
                 </View>
@@ -62,7 +63,7 @@ export default function AddQuickModal({ show, click, itemId }) {
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 }]}>
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             show(false);
                         }}>
@@ -73,7 +74,7 @@ export default function AddQuickModal({ show, click, itemId }) {
                     </TouchableHighlight>
 
                     {showPage != 0 && <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             add();
                             show(false);

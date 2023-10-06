@@ -6,7 +6,9 @@ export const colors = {
     buttonClk: "#333",
     modal: "#333",
     modalBg: "#00000080",
-    modalButtonClk: "",
+    modalButtonClk: "#555",
+    inputFocus: "#fff",
+    inputBlur: "#888",
 }
 
 export const size = {
@@ -16,6 +18,17 @@ export const size = {
 export const text = {
     historySaved: '기록되었습니다',
     backup: '데이터를 내보냈습니다',
+}
+
+export const lightColors = {
+    text: "#000",
+    bg: "#eee",
+    buttonClk: "#ddd",
+    modal: "#ddd",
+    modalBg: "#00000080",
+    modalButtonClk: "#ccc",
+    inputFocus: "#000",
+    inputBlur: "#888",
 }
 
 export const common = StyleSheet.create({

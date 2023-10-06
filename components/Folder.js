@@ -7,6 +7,7 @@ import MainItem from './MainItem';
 import { useDispatch, useSelector } from "react-redux";
 
 import { common } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 
 import * as ItemDAO from '../sqlite/item';
 
@@ -46,7 +47,7 @@ export default function Folder({ folders, idx, setSelected, setSelectedItem, set
             ))}
 
             <TouchableHighlight
-                underlayColor="#333"
+                underlayColor={appThemeColor.buttonClk}
                 onPress={() => {
                     setSelected(idx);
                     showAddItem(true);

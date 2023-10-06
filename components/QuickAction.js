@@ -3,6 +3,7 @@ import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
 import { common, text } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 
 import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/user'
 
@@ -64,7 +65,7 @@ export default function QuickAction({ item }) {
         <View style={[common.fxr, {}]}>
             <Text style={[common.text, { color: 'gray', paddingVertical: 5 }]}>└ </Text>
             <TouchableHighlight
-                underlayColor="#333"
+                underlayColor={appThemeColor.buttonClk}
                 onPress={() => {
                     add();
                 }}>

@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 import React from 'react'
-import { common, colors } from '../style';
+import { common } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 
 import HelpImg from '../assets/imgs/Help2.jpg'
 
 export default function HelpDetailModal({ show }) {
     return (
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
-            <View style={[common.modal, { height: '90%' }]}>
+            <View style={[common.modal, { height: '90%', backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
                     <Text style={[common.text, { fontWeight: 'bold', }]}>도움말</Text>
                 </View>
@@ -16,7 +17,7 @@ export default function HelpDetailModal({ show }) {
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             show(false);
                         }}>

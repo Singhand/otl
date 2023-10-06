@@ -3,6 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
 import { common } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 import getFontSize from '../utils/getFontSize'
 
 import TextInputLine from './TextInputLine';
@@ -28,7 +29,7 @@ export default function EditHistoryModal({ idx, item, show }) {
 
     return (
         <View style={[common.modalBg, {}]}>
-            <View style={[common.modal, {}]}>
+            <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
                     <Text style={[common.text, { fontWeight: 'bold', }]}>기록 수정</Text>
                 </View>
@@ -38,7 +39,7 @@ export default function EditHistoryModal({ idx, item, show }) {
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             show(false);
                         }}>
@@ -47,7 +48,7 @@ export default function EditHistoryModal({ idx, item, show }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             if (content.length > 0 && content.length <= 100) {
                                 let itemCopy = { ...item }
@@ -61,7 +62,7 @@ export default function EditHistoryModal({ idx, item, show }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             deleteHistory(item);
                             show(false);

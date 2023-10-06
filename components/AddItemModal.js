@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import getFontSize from '../utils/getFontSize'
 
 import { common } from '../style';
+import { appThemeColor, appLang } from '../utils/appSetting'
 
 import TextInputLine from './TextInputLine';
 
@@ -12,7 +13,7 @@ export default function AddItemModal({ add, show }) {
 
     return (
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
-            <View style={[common.modal, {}]}>
+            <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
                     <Text style={[common.text, { fontWeight: 'bold', }]}>아이템 추가</Text>
                 </View>
@@ -22,7 +23,7 @@ export default function AddItemModal({ add, show }) {
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             show(false);
                         }}>
@@ -31,7 +32,7 @@ export default function AddItemModal({ add, show }) {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        underlayColor="#292929"
+                        underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
                             if (title.length > 0 && title.length <= 100) {
                                 add(title);

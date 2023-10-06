@@ -6,6 +6,8 @@ export const userSlice = createSlice({
         quickType2Modal: false,
         quickItem: null,
         adModal: false,
+        theme: 0,
+        lang: 0,
     },
     reducers: {
         showQuickType2Modal: (state, action) => {
@@ -17,9 +19,15 @@ export const userSlice = createSlice({
         showAdModal: (state, action) => {
             state.adModal = action.payload
         },
+        setTheme: (state, action) => {
+            state.theme = action.payload
+        },
+        setLang: (state, action) => {
+            state.lang = action.payload
+        },
     },
 });
 
-export const { showQuickType2Modal, setQuickItem, showAdModal } = userSlice.actions;
+export const { showQuickType2Modal, setQuickItem, showAdModal, setTheme, setLang } = userSlice.actions;
 
 export default userSlice.reducer;
