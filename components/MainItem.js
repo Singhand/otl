@@ -37,7 +37,7 @@ export default function MainItem({ idx, item, click }) {
                     click(idx)
                 }}>
                 <View>
-                    <Text style={[common.text, { fontSize: getFontSize(18), paddingVertical: getFontSize(5) }]}>{item.title}</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontSize: getFontSize(18), paddingVertical: getFontSize(5) }]}>{item.title}</Text>
                 </View>
             </TouchableHighlight>
 

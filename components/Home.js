@@ -12,7 +12,7 @@ import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/
 
 import getFontSize from '../utils/getFontSize';
 import { appThemeColor, appLang, setTheme, setLang } from '../utils/appSetting'
-import { common, colors, lightColors } from '../style';
+import { common, darkColors, lightColors } from '../style';
 
 import Folder from './Folder';
 import AddFolderModal from './AddFolderModal';
@@ -117,7 +117,7 @@ export default function Home() {
     }
 
     return (
-        <View style={{ backgroundColor: appThemeColor.bg, flex: 1, color: '#fff' }}>
+        <View style={{ backgroundColor: appThemeColor.bg, flex: 1 }}>
 
             <View style={[styles.fdr, styles.folderCtn, {
 
@@ -135,7 +135,7 @@ export default function Home() {
                             onPress={() => {
                                 setShowAdd(true);
                             }}>
-                            <Text style={[styles.add, {}]}>+</Text>
+                            <Text style={[styles.add, { color: appThemeColor.text }]}>+</Text>
                         </TouchableHighlight>}
 
                 </View>
@@ -154,7 +154,7 @@ export default function Home() {
                             onPress={() => {
                                 setShowAdd(true);
                             }}>
-                            <Text style={[styles.add, {}]}>+</Text>
+                            <Text style={[styles.add, { color: appThemeColor.text }]}>+</Text>
                         </TouchableHighlight>}
                 </View>
             </View>
@@ -174,7 +174,7 @@ export default function Home() {
                             onPress={() => {
                                 setShowAdd(true);
                             }}>
-                            <Text style={[styles.add, {}]}>+</Text>
+                            <Text style={[styles.add, { color: appThemeColor.text }]}>+</Text>
                         </TouchableHighlight>}
                 </View>
                 <View style={styles.folderDividerV}></View>
@@ -191,7 +191,7 @@ export default function Home() {
                             onPress={() => {
                                 setShowAdd(true);
                             }}>
-                            <Text style={[styles.add, {}]}>+</Text>
+                            <Text style={[styles.add, { color: appThemeColor.text }]}>+</Text>
                         </TouchableHighlight>}
                 </View>
             </View>
@@ -206,7 +206,7 @@ export default function Home() {
                         setShowHelp(true)
                     }}
                     style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
-                    <Image source={helpIcon} style={[common.icon, {}]}></Image>
+                    <Image source={helpIcon} style={[common.icon, { tintColor: appThemeColor.text }]}></Image>
                 </TouchableHighlight>
 
                 <TouchableHighlight
@@ -215,7 +215,7 @@ export default function Home() {
                         setShowSetting(true)
                     }}
                     style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
-                    <Image source={settingIcon} style={[common.icon, {}]}></Image>
+                    <Image source={settingIcon} style={[common.icon, { tintColor: appThemeColor.text }]}></Image>
                 </TouchableHighlight>
 
             </View>
@@ -241,7 +241,6 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     add: {
-        color: '#fff',
         fontSize: getFontSize(40)
     },
     folderCtn: {

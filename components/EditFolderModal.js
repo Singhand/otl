@@ -93,7 +93,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { fontWeight: 'bold', }]}>폴더 수정</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>폴더 수정</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
                     <TextInputLine placeholder='폴더명을 입력하세요' value={title} set={setTitle}></TextInputLine>
@@ -107,7 +107,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨 앞</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨 앞</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -117,7 +117,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨뒤</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨뒤</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -127,7 +127,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>왼쪽</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>왼쪽</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -137,7 +137,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>오른쪽</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>오른쪽</Text>
                     </TouchableHighlight>
                 </View>
 
@@ -148,7 +148,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -157,7 +157,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             remove();
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>삭제</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>삭제</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -169,7 +169,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>수정</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>수정</Text>
                     </TouchableHighlight>
                 </View>
             </View>

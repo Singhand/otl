@@ -15,7 +15,7 @@ export default function AddItemModal({ add, show }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { fontWeight: 'bold', }]}>아이템 추가</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>아이템 추가</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
                     <TextInputLine placeholder='이름을 입력하세요' value={title} set={setTitle}></TextInputLine>
@@ -28,7 +28,7 @@ export default function AddItemModal({ add, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -40,7 +40,7 @@ export default function AddItemModal({ add, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
                     </TouchableHighlight>
                 </View>
             </View>

@@ -11,7 +11,7 @@ export default function HelpHomeModal({ show }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { height: '90%', backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { fontWeight: 'bold', }]}>도움말</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>도움말</Text>
                 </View>
 
                 <Image source={HelpImg} style={[styles.e, { width: "100%", flex: 1, marginVertical: 10 }]} resizeMode='contain'></Image>
@@ -23,7 +23,7 @@ export default function HelpHomeModal({ show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: 10, }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: 10, }]}>닫기</Text>
                     </TouchableHighlight>
                 </View>
             </View>

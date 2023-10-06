@@ -12,7 +12,7 @@ export default function FolderTitle({ title, click }) {
                 click();
             }}>
             <View >
-                <Text style={{ color: '#fff', fontSize: getFontSize(24) }}>{title}</Text>
+                <Text style={{ color: appThemeColor.text, fontSize: getFontSize(24) }}>{title}</Text>
             </View>
         </TouchableHighlight>
     )

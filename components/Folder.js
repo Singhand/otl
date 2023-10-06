@@ -53,7 +53,7 @@ export default function Folder({ folders, idx, setSelected, setSelectedItem, set
                     showAddItem(true);
                 }}
                 style={[styles.e, { justifyContent: 'center' }]}>
-                <Text style={[common.text, { fontSize: 36 }]}>+
+                <Text style={[common.text, { color: appThemeColor.text }, { fontSize: 36 }]}>+
                 </Text>
             </TouchableHighlight>
 

@@ -130,7 +130,7 @@ export default function SettingModal({ show, reload }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row', marginBottom: 10 }]}>
-                    <Text style={[common.text, { fontWeight: 'bold', }]}>설정</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>설정</Text>
                 </View>
 
                 <ModalButton text={'데이터 내보내기'} idx={1} click={exportDb}> </ModalButton>
@@ -148,7 +148,7 @@ export default function SettingModal({ show, reload }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: 10, }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: 10, }]}>닫기</Text>
 
 
                     </TouchableHighlight>

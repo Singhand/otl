@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const colors = {
+export const darkColors = {
     text: "#fff",
     bg: "#222",
     buttonClk: "#333",
@@ -20,6 +20,11 @@ export const text = {
     backup: '데이터를 내보냈습니다',
 }
 
+export const english = {
+    historySaved: 'History saved',
+    backup: 'Data exported',
+}
+
 export const lightColors = {
     text: "#000",
     bg: "#eee",
@@ -36,13 +41,11 @@ export const common = StyleSheet.create({
 
     },
     text: {
-        color: colors.text,
         fontSize: 16
     },
     icon: {
         width: 24,
         height: 24,
-        tintColor: colors.text,
     },
     fxr: {
         flexDirection: 'row'

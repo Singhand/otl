@@ -68,7 +68,7 @@ export default function QuickType2Modal({ }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { fontWeight: 'bold', }]}>기록 추가</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>기록 추가</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
                     <TextInputLine placeholder='내용을 입력하세요' value={content} set={setcontent}></TextInputLine>
@@ -81,7 +81,7 @@ export default function QuickType2Modal({ }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -93,7 +93,7 @@ export default function QuickType2Modal({ }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
                     </TouchableHighlight>
                 </View>
             </View>

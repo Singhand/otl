@@ -15,8 +15,8 @@ export default function History({ item, idx, showEdit }) {
             }}>
             <View>
                 <View style={[common.fxr, { paddingVertical: 10 }]}>
-                    <Text style={[common.text, { flex: 1 }]} numberOfLines={1}>{item.content}</Text>
-                    <Text style={[common.text, { color: 'gray' }]} numberOfLines={1}>{time}</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { flex: 1 }]} numberOfLines={1}>{item.content}</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { color: 'gray' }]} numberOfLines={1}>{time}</Text>
                 </View>
                 <View style={[styles.e, { height: 1, backgroundColor: "#323232" }]}></View>
             </View>

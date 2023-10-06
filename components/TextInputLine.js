@@ -8,7 +8,7 @@ export default function TextInputLine({ placeholder, value, set, forRef }) {
 
     return (
         <View>
-            <TextInput style={[common.text, common.normal, {}]} value={value} placeholder={placeholder} onChangeText={set}
+            <TextInput style={[common.text, { color: appThemeColor.text }, common.normal, {}]} value={value} placeholder={placeholder} onChangeText={set}
                 placeholderTextColor={'gray'}
                 onFocus={() => { setFocus(true) }}
                 onBlur={() => { setFocus(false) }}

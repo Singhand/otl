@@ -46,7 +46,7 @@ export default function AddQuickModal({ show, click, itemId }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row', marginBottom: 10 }]}>
-                    <Text style={[common.text, { fontWeight: 'bold', }]}>빠른 기록 추가</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>빠른 기록 추가</Text>
                 </View>
 
                 {showPage == 0 && <View><ModalButton text={'고정 텍스트'} idx={1} click={setShowPage}> </ModalButton>
@@ -68,7 +68,7 @@ export default function AddQuickModal({ show, click, itemId }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
 
 
                     </TouchableHighlight>
@@ -80,7 +80,7 @@ export default function AddQuickModal({ show, click, itemId }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
 
 
                     </TouchableHighlight>}

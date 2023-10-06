@@ -31,7 +31,7 @@ export default function EditHistoryModal({ idx, item, show }) {
         <View style={[common.modalBg, {}]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { fontWeight: 'bold', }]}>기록 수정</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>기록 수정</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
                     <TextInputLine placeholder='내용을 입력하세요' value={content} set={setContent}></TextInputLine>
@@ -44,7 +44,7 @@ export default function EditHistoryModal({ idx, item, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -58,7 +58,7 @@ export default function EditHistoryModal({ idx, item, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>수정</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>수정</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -68,7 +68,7 @@ export default function EditHistoryModal({ idx, item, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { fontWeight: 'bold', padding: getFontSize(10), }]}>삭제</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>삭제</Text>
                     </TouchableHighlight>
                 </View>
             </View>
