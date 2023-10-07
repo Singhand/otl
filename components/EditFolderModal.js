@@ -24,14 +24,16 @@ export default function EditFolderModal({ idx, folder, setShow }) {
     }
 
     function remove() {
-        Alert.alert('폴더 삭제', '폴더를 삭제하면 폴더 안의 아이템과 기록들이 모두 삭제됩니다.', [
+        Alert.alert(appLang == 0 ? '폴더 삭제' : 'Delete Folder', appLang == 0 ? '폴더를 삭제하면 폴더 안의 아이템과 기록들이 모두 삭제됩니다.'
+            : 'All items and histories in the folder are deleted.', [
             {
-                text: '취소',
+                text: appLang == 0 ? '취소' : 'Cancel',
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
             },
             {
-                text: '삭제', onPress: () => {
+                text: appLang == 0 ? '삭제' : 'Delete',
+                onPress: () => {
                     console.log('OK Pressed');
                     FolderDAO.remove(folder.id, dispatch);
                     setShow(false);
@@ -93,10 +95,10 @@ export default function EditFolderModal({ idx, folder, setShow }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>폴더 수정</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '폴더 수정' : 'Edit Folder'}</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
-                    <TextInputLine placeholder='폴더명을 입력하세요' value={title} set={setTitle}></TextInputLine>
+                    <TextInputLine placeholder={appLang == 0 ? '폴더명을 입력하세요' : 'Enter a title'} value={title} set={setTitle}></TextInputLine>
                 </View>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
@@ -107,7 +109,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨 앞</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '맨 앞' : 'Move Start'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -117,7 +119,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨뒤</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '맨 뒤' : 'Move End'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -127,7 +129,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>왼쪽</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '왼쪽' : 'Move Left'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -137,7 +139,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>오른쪽</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '오른쪽' : 'Move Right'}</Text>
                     </TouchableHighlight>
                 </View>
 
@@ -148,7 +150,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '닫기' : 'Close'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -157,7 +159,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             remove();
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>삭제</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '삭제' : 'Delete'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -169,7 +171,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                             setShow(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>수정</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '수정' : 'Edit'}</Text>
                     </TouchableHighlight>
                 </View>
             </View>

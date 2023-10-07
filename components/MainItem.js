@@ -30,7 +30,8 @@ export default function MainItem({ idx, item, click }) {
                 underlayColor={appThemeColor.buttonClk}
                 onPress={() => {
                     navigation.navigate('Details', {
-                        itemId: item.id
+                        itemId: item.id,
+                        title: item.title,
                     });
                 }}
                 onLongPress={() => {

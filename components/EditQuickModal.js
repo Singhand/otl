@@ -84,12 +84,12 @@ export default function EditQuickModal({ item, idx, show }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>빠른 기록 수정</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '빠른 기록 수정' : 'Edit Quick Action'}</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
 
-                    {type == 1 && <TextInputLine placeholder='고정 텍스트를 입력하세요' value={title} set={setTitle}></TextInputLine>}
-                    {type == 2 && <TextInputLine placeholder='표시될 이름을 입력하세요' value={title} set={setTitle}></TextInputLine>}
+                    {type == 1 && <TextInputLine placeholder={appLang == 0 ? '고정 텍스트를 입력하세요' : 'Enter a fixed text'} value={title} set={setTitle}></TextInputLine>}
+                    {type == 2 && <TextInputLine placeholder={appLang == 0 ? '표시될 이름을 입력하세요' : 'Enter a title of quick action'} value={title} set={setTitle}></TextInputLine>}
                 </View>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
@@ -100,7 +100,7 @@ export default function EditQuickModal({ item, idx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨 앞</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '맨 앞' : 'Move Start'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -110,7 +110,7 @@ export default function EditQuickModal({ item, idx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨뒤</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '맨 뒤' : 'Move End'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -120,7 +120,7 @@ export default function EditQuickModal({ item, idx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>왼쪽</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '왼쪽' : 'Move Left'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -130,7 +130,7 @@ export default function EditQuickModal({ item, idx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>오른쪽</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '오른쪽' : 'Move Right'}</Text>
                     </TouchableHighlight>
                 </View>
 
@@ -141,7 +141,7 @@ export default function EditQuickModal({ item, idx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '닫기' : 'Close'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -150,7 +150,7 @@ export default function EditQuickModal({ item, idx, show }) {
                             remove();
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>삭제</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '삭제' : 'Delete'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -162,7 +162,7 @@ export default function EditQuickModal({ item, idx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>수정</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '수정' : 'Edit'}</Text>
                     </TouchableHighlight>
                 </View>
             </View>

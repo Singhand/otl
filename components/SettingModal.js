@@ -81,9 +81,10 @@ export default function SettingModal({ show, reload }) {
 
             open()
 
-            Alert.alert('백업 완료', '앱을 새로고침해 주세요', [
+            Alert.alert(appLang == 0 ? '백업 완료' : 'Backup Complete', appLang == 0 ? '앱을 새로고침해 주세요.' : 'Please reload app.', [
                 {
-                    text: '새로고침', onPress: () => {
+                    text: appLang == 0 ? '새로고침' : 'Reload',
+                    onPress: () => {
                         reload()
                     }, style: 'destructive',
                 },
@@ -103,7 +104,7 @@ export default function SettingModal({ show, reload }) {
 
     function toast() {
         // Add a Toast on screen.
-        let toast = Toast.show(text.backup, {
+        let toast = Toast.show(appLang == 0 ? '데이터를 내보냈습니다' : 'Data exported', {
             duration: Toast.durations.SHORT,
             position: Toast.positions.BOTTOM,
             shadow: true,
@@ -130,14 +131,14 @@ export default function SettingModal({ show, reload }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row', marginBottom: 10 }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>설정</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '설정' : 'Settings'}</Text>
                 </View>
 
-                <ModalButton text={'데이터 내보내기'} idx={1} click={exportDb}> </ModalButton>
+                <ModalButton text={appLang == 0 ? '데이터 내보내기' : 'Export data'} idx={1} click={exportDb}> </ModalButton>
                 <View style={[styles.w, { height: 10 }]}></View>
-                <ModalButton text='데이터 가져오기' idx={2} click={importDb}> </ModalButton>
+                <ModalButton text={appLang == 0 ? '데이터 가져오기' : 'Import data'} idx={2} click={importDb}> </ModalButton>
                 <View style={[styles.w, { height: 10 }]}></View>
-                <ModalButton text='다크모드 / 라이트모드' idx={3} click={changeTheme}> </ModalButton>
+                <ModalButton text={appLang == 0 ? '다크모드 / 라이트모드' : 'Dark Mode / Light Mode'} idx={3} click={changeTheme}> </ModalButton>
                 <View style={[styles.w, { height: 10 }]}></View>
                 <ModalButton text='한국어 / English' idx={4} click={changeLang}> </ModalButton>
 
@@ -148,7 +149,7 @@ export default function SettingModal({ show, reload }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: 10, }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: 10, }]}>{appLang == 0 ? '닫기' : 'Close'}</Text>
 
 
                     </TouchableHighlight>

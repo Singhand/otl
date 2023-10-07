@@ -26,14 +26,16 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
     }
 
     function remove() {
-        Alert.alert('아이템 삭제', '아이템을 삭제하면 기록들이 모두 삭제됩니다.', [
+        Alert.alert(appLang == 0 ? '아이템 삭제' : 'Delete Item', appLang == 0 ? '아이템을 삭제하면 기록들이 모두 삭제됩니다.'
+            : 'All Histories in the item are deleted.', [
             {
-                text: '취소',
+                text: appLang == 0 ? '취소' : 'Cancel',
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
             },
             {
-                text: '삭제', onPress: () => {
+                text: appLang == 0 ? '삭제' : 'Delete',
+                onPress: () => {
                     console.log('OK Pressed');
                     ItemDAO.remove(items[itemIdx].id, folderId, dispatch);
                     show(false);
@@ -95,10 +97,10 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>아이템 수정</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '아이템 수정' : 'Edit Item'}</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
-                    <TextInputLine placeholder='이름을 입력하세요' value={title} set={setTitle}></TextInputLine>
+                    <TextInputLine placeholder={appLang == 0 ? '이름을 입력하세요' : 'Enter a title'} value={title} set={setTitle}></TextInputLine>
                 </View>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
@@ -109,7 +111,7 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨 앞</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '맨 앞' : 'Move Start'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -119,7 +121,7 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>맨뒤</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '맨 뒤' : 'Move End'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -129,7 +131,7 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>위로</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '위로' : 'Move Up'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -139,7 +141,7 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>아래로</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '아래로' : 'Move Down'}</Text>
                     </TouchableHighlight>
                 </View>
 
@@ -150,7 +152,7 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '닫기' : 'Close'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -159,7 +161,7 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                             remove();
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>삭제</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '삭제' : 'Delete'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -171,7 +173,7 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>수정</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '수정' : 'Edit'}</Text>
                     </TouchableHighlight>
                 </View>
             </View>

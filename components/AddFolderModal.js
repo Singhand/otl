@@ -15,11 +15,10 @@ export default function AddFolderModal({ add, setShowAdd }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>폴더 추가</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '폴더 추가' : 'Add Folder'}</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
-                    <TextInputLine placeholder='폴더명을 입력하세요' value={title} set={setTitle}></TextInputLine>
-
+                    <TextInputLine placeholder={appLang == 0 ? '폴더명을 입력하세요' : 'Enter a title'} value={title} set={setTitle}></TextInputLine>
                 </View>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
@@ -29,7 +28,7 @@ export default function AddFolderModal({ add, setShowAdd }) {
                             setShowAdd(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '닫기' : 'Close'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -41,7 +40,7 @@ export default function AddFolderModal({ add, setShowAdd }) {
                             setShowAdd(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '추가' : 'Add'}</Text>
                     </TouchableHighlight>
                 </View>
             </View>

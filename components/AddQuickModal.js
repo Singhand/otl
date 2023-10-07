@@ -46,19 +46,19 @@ export default function AddQuickModal({ show, click, itemId }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row', marginBottom: 10 }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>빠른 기록 추가</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '빠른 기록 추가' : 'Add Quick Action'}</Text>
                 </View>
 
-                {showPage == 0 && <View><ModalButton text={'고정 텍스트'} idx={1} click={setShowPage}> </ModalButton>
+                {showPage == 0 && <View><ModalButton text={appLang == 0 ? '고정 텍스트' : 'Fixed Text'} idx={1} click={setShowPage}> </ModalButton>
                     <View style={[styles.w, { height: 10 }]}></View>
-                    <ModalButton text='직접 입력' idx={2} click={setShowPage}> </ModalButton></View>}
+                    <ModalButton text={appLang == 0 ? '직접 입력' : 'Manual Input'} idx={2} click={setShowPage}> </ModalButton></View>}
 
                 {showPage == 1 && <View>
-                    <TextInputLine value={type1title} set={setType1title} placeholder={'고정 텍스트를 입력하세요'}></TextInputLine>
+                    <TextInputLine value={type1title} set={setType1title} placeholder={appLang == 0 ? '고정 텍스트를 입력하세요' : 'Enter a fixed text'}></TextInputLine>
                 </View>}
 
                 {showPage == 2 && <View>
-                    <TextInputLine value={type2title} set={setType2title} placeholder={'표시될 이름을 입력하세요'}></TextInputLine>
+                    <TextInputLine value={type2title} set={setType2title} placeholder={appLang == 0 ? '표시될 이름을 입력하세요' : 'Enter a title of quick action'}></TextInputLine>
                 </View>}
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 }]}>
@@ -68,7 +68,7 @@ export default function AddQuickModal({ show, click, itemId }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '닫기' : 'Close'}</Text>
 
 
                     </TouchableHighlight>
@@ -80,7 +80,7 @@ export default function AddQuickModal({ show, click, itemId }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '추가' : 'Add'}</Text>
 
 
                     </TouchableHighlight>}

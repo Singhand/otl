@@ -41,7 +41,7 @@ export default function QuickType2Modal({ }) {
 
     function toast() {
         // Add a Toast on screen.
-        let toast = Toast.show(text.historySaved, {
+        let toast = Toast.show(appLang == 0 ? '기록되었습니다' : 'History saved', {
             duration: Toast.durations.SHORT,
             position: Toast.positions.BOTTOM,
             shadow: true,
@@ -68,10 +68,10 @@ export default function QuickType2Modal({ }) {
         <View style={[common.modalBg, { flexDirection: 'row' }]}>
             <View style={[common.modal, { backgroundColor: appThemeColor.modal }]}>
                 <View style={[styles.fxr, { flexDirection: 'row' }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>기록 추가</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '기록 추가' : 'Add History'}</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
-                    <TextInputLine placeholder='내용을 입력하세요' value={content} set={setcontent}></TextInputLine>
+                    <TextInputLine placeholder={appLang == 0 ? '내용을 입력하세요' : 'Enter a content'} value={content} set={setcontent}></TextInputLine>
                 </View>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
@@ -81,7 +81,7 @@ export default function QuickType2Modal({ }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>닫기</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '닫기' : 'Close'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
@@ -93,7 +93,7 @@ export default function QuickType2Modal({ }) {
                             show(false);
                         }}>
 
-                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>추가</Text>
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '추가' : 'Add'}</Text>
                     </TouchableHighlight>
                 </View>
             </View>

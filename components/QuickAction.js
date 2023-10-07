@@ -38,27 +38,28 @@ export default function QuickAction({ item }) {
 
     function toast() {
         // Add a Toast on screen.
-        let toast = Toast.show(text.historySaved, {
-            duration: Toast.durations.SHORT,
-            position: Toast.positions.BOTTOM,
-            shadow: true,
-            animation: true,
-            hideOnPress: true,
-            backgroundColor: '#222',
-            delay: 0,
-            onShow: () => {
-                // calls on toast\`s appear animation start
-            },
-            onShown: () => {
-                // calls on toast\`s appear animation end.
-            },
-            onHide: () => {
-                // calls on toast\`s hide animation start.
-            },
-            onHidden: () => {
-                // calls on toast\`s hide animation end.
-            }
-        });
+        let toast = Toast.show(appLang == 0 ? '기록되었습니다' : 'History saved',
+            {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                backgroundColor: '#222',
+                delay: 0,
+                onShow: () => {
+                    // calls on toast\`s appear animation start
+                },
+                onShown: () => {
+                    // calls on toast\`s appear animation end.
+                },
+                onHide: () => {
+                    // calls on toast\`s hide animation start.
+                },
+                onHidden: () => {
+                    // calls on toast\`s hide animation end.
+                }
+            });
     }
 
     return (

@@ -18,11 +18,19 @@ export const size = {
 export const text = {
     historySaved: '기록되었습니다',
     backup: '데이터를 내보냈습니다',
+    addFolderTitle: '폴더 추가',
+    addFolderInput: '폴더명을 입력하세요',
+    add: '추가',
+    close: '닫기',
 }
 
-export const english = {
+export const englishText = {
     historySaved: 'History saved',
     backup: 'Data exported',
+    addFolderTitle: 'Add Folder',
+    addFolderInput: 'Write a title',
+    add: 'Add',
+    close: 'Close',
 }
 
 export const lightColors = {

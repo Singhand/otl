@@ -24,7 +24,7 @@ import * as HistoryDAO from '../sqlite/history';
 import * as QuickDAO from '../sqlite/quick';
 
 export default function Detail({ route, navigation }) {
-    const { itemId } = route.params;
+    const { itemId, title } = route.params;
 
     // state
     const [showEditHistory, setShowEditHistory] = useState(false)
@@ -105,14 +105,15 @@ export default function Detail({ route, navigation }) {
     }
 
     function clearHistory(params) {
-        Alert.alert('기록 초기화', '기록들이 모두 삭제됩니다.', [
+        Alert.alert(appLang == 0 ? '기록 초기화' : 'Clear History', appLang == 0 ? '기록들이 모두 삭제됩니다.' : 'All Histories are deleted.', [
             {
-                text: '취소',
+                text: appLang == 0 ? '취소' : 'Cancel',
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
             },
             {
-                text: '삭제', onPress: () => {
+                text: appLang == 0 ? '삭제' : 'Clear',
+                onPress: () => {
                     console.log('OK Pressed');
                     HistoryDAO.clear(itemId, dispatch)
 
@@ -122,7 +123,6 @@ export default function Detail({ route, navigation }) {
 
     }
 
-    const iter = Array(20).fill(null);
     return (
         <View style={{ backgroundColor: appThemeColor.bg, flex: 1, alignItems: 'center' }}>
 
@@ -137,7 +137,7 @@ export default function Detail({ route, navigation }) {
                 </TouchableHighlight>
 
                 <View style={[styles.e, { flex: 1, }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontSize: 24, textAlign: 'left' }]} numberOfLines={1}>제목</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontSize: 24, textAlign: 'left' }]} numberOfLines={1}>{title}</Text>
                 </View>
 
                 <TouchableHighlight
@@ -164,13 +164,13 @@ export default function Detail({ route, navigation }) {
                     onPress={() => {
                         clearHistory()
                     }}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { padding: 10 }]}>초기화</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { padding: 10 }]}>{appLang == 0 ? '초기화' : 'Clear'}</Text>
                 </TouchableHighlight>
             </View>
 
             {showSearch &&
                 <View style={[common.fxr, { width: '100%', alignItems: 'center', justifyContent: 'center', padding: 10 }]}>
-                    <TextInputLine placeholder={'검색어를 입력하세요'} value={searchWord} set={setSearchWord} forRef={searchInputRef}></TextInputLine>
+                    <TextInputLine placeholder={appLang == 0 ? '검색어를 입력하세요' : 'Enter a keyword'} value={searchWord} set={setSearchWord} forRef={searchInputRef}></TextInputLine>
                     <TouchableHighlight
                         underlayColor={appThemeColor.buttonClk}
                         onPress={() => {
@@ -182,7 +182,7 @@ export default function Detail({ route, navigation }) {
                 </View>}
 
             <View>
-                <Text style={[common.text, { color: appThemeColor.text }, { color: 'gray' }]}>총 기록 개수 {items == undefined ? 0 : items.length}개</Text>
+                <Text style={[common.text, { color: appThemeColor.text }, { color: 'gray' }]}>{appLang == 0 ? '총 기록 개수' : 'Total History'} : {items == undefined ? 0 : items.length}</Text>
             </View>
 
             <ScrollView style={[common.e, { width: '100%', padding: 10 }]}>
@@ -193,7 +193,7 @@ export default function Detail({ route, navigation }) {
 
             <View style={[common.topRound, { width: '100%', backgroundColor: appThemeColor.modal, padding: 10 }]}>
                 <View style={[common.fxr, { alignItems: 'center' }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { flex: 1, fontSize: 20 }]}>빠른 기록 관리</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { flex: 1, fontSize: 20 }]}>{appLang == 0 ? '빠른 기록 관리' : 'Quick Actions'}</Text>
 
                     <TouchableHighlight
                         underlayColor={appThemeColor.modalButtonClk}

@@ -12,7 +12,7 @@ import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/
 
 import getFontSize from '../utils/getFontSize';
 import { appThemeColor, appLang, setTheme, setLang } from '../utils/appSetting'
-import { common, darkColors, lightColors } from '../style';
+import { common, darkColors, lightColors, text, englishText } from '../style';
 
 import Folder from './Folder';
 import AddFolderModal from './AddFolderModal';
@@ -54,7 +54,8 @@ export default function Home() {
     let appLang = useSelector(state => state.user.lang);
 
     // 앱 테마, 언어 스타일
-    setTheme((appTheme == 0) ? colors : lightColors);
+    setTheme((appTheme == 0) ? darkColors : lightColors);
+    setLang(appLang)
 
     useEffect(() => {
         console.log('useEffect-Home');
