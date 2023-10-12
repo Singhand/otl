@@ -92,7 +92,7 @@ export default function EditQuickModal({ item, idx, show }) {
                     {type == 2 && <TextInputLine placeholder={appLang == 0 ? '표시될 이름을 입력하세요' : 'Enter a title of quick action'} value={title} set={setTitle}></TextInputLine>}
                 </View>
 
-                <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
+                <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', flexWrap: 'wrap' }]}>
                     <TouchableHighlight
                         underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {

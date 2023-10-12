@@ -20,3 +20,9 @@ useFocusEffect(
         return () => subscription.remove();
     }, [showAdd, showEdit])
 );
+
+// "splash": {
+    //   "image": "./assets/splash.png",
+    //   "resizeMode": "contain",
+    //   "backgroundColor": "#ffffff"
+    // },

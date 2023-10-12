@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
 import getFontSize from '../utils/getFontSize'
@@ -22,9 +22,22 @@ export default function QuickType2Modal({ }) {
 
     let [content, setcontent] = useState('')
 
+    // ref
+    const inputRef = useRef(null);
+
     function show(params) {
         dispatch(showQuickType2Modal(params))
     }
+
+    function focusTextInput() {
+        setTimeout(() => {
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
+        }, 10);
+    };
+
+    focusTextInput()
 
     function add(content) {
         setAd()
@@ -71,7 +84,7 @@ export default function QuickType2Modal({ }) {
                     <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '기록 추가' : 'Add History'}</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
-                    <TextInputLine placeholder={appLang == 0 ? '내용을 입력하세요' : 'Enter a content'} value={content} set={setcontent}></TextInputLine>
+                    <TextInputLine placeholder={appLang == 0 ? '내용을 입력하세요' : 'Enter a content'} value={content} set={setcontent} forRef={inputRef}></TextInputLine>
                 </View>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>

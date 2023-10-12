@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Pressable, LogBox, TouchableHighlight } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,6 +13,15 @@ import store from './redux/store';
 import Home from './components/Home';
 import Detail from './components/Detail';
 
+import mobileAds from 'react-native-google-mobile-ads';
+
+mobileAds()
+  .initialize()
+  .then(adapterStatuses => {
+    // Initialization complete!
+  });
+
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -23,11 +32,12 @@ export default function App() {
   return (
     <RootSiblingParent>
       <Provider store={store}>
+        <StatusBar></StatusBar>
         <SafeAreaProvider>
           <SafeAreaView style={styles.container}>
             <NavigationContainer>
               <Stack.Navigator initialRouteName="Home" screenOptions={{
-                headerTransparent: true, headerTintColor: 'white', headerShown: false,
+                headerTransparent: true, headerTintColor: 'white', headerShown: false, animation: 'none'
               }}>
                 <Stack.Screen name="Home" component={Home} options={{ title: '' }} />
                 <Stack.Screen name="Details" component={Detail} options={{ title: '' }} />

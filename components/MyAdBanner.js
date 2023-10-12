@@ -1,8 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 import React from 'react'
 
-const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+const unitID =
+    Platform.select({
+        ios: 'ca-app-pub-복사한ID',
+        android: 'ca-app-pub-1583983896718087/2427467801',
+    }) || '';
+
+const adUnitId = __DEV__ ? TestIds.BANNER : unitID;
 
 export default function MyAdBanner() {
     return (

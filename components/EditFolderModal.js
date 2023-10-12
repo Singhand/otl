@@ -101,7 +101,7 @@ export default function EditFolderModal({ idx, folder, setShow }) {
                     <TextInputLine placeholder={appLang == 0 ? '폴더명을 입력하세요' : 'Enter a title'} value={title} set={setTitle}></TextInputLine>
                 </View>
 
-                <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
+                <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', flexWrap: 'wrap' }]}>
                     <TouchableHighlight
                         underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {

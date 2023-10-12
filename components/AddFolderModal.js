@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import getFontSize from '../utils/getFontSize'
 

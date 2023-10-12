@@ -23,7 +23,8 @@ import QuickType2Modal from './QuickType2Modal';
 import HelpHomeModal from './HelpHomeModal';
 import SettingModal from './SettingModal';
 import AdModal from './AdModal';
-// import MyAdBanner from './MyAdBanner';
+import MyAdBanner from './MyAdBanner';
+import HistoryAd from './HistoryAd';
 
 import helpIcon from '../assets/imgs/help.png'
 import settingIcon from '../assets/imgs/settings.png'
@@ -55,7 +56,7 @@ export default function Home() {
 
     // 앱 테마, 언어 스타일
     setTheme((appTheme == 0) ? darkColors : lightColors);
-    setLang(appLang)
+    setLang(appLang);
 
     useEffect(() => {
         console.log('useEffect-Home');
@@ -120,6 +121,7 @@ export default function Home() {
     return (
         <View style={{ backgroundColor: appThemeColor.bg, flex: 1 }}>
 
+            {/* 상단폴더 */}
             <View style={[styles.fdr, styles.folderCtn, {
 
             }]}>
@@ -161,6 +163,7 @@ export default function Home() {
             </View>
             <View style={styles.folderDividerH} ></View>
 
+            {/* 하단 폴더 */}
             <View style={[styles.fdr, styles.folderCtn]}>
                 <View style={[styles.folder, {
                     alignItems: 'center',
@@ -197,32 +200,43 @@ export default function Home() {
                 </View>
             </View>
 
+            {/* footer */}
             <View style={[styles.fdr, {
-                width: '100%', zIndex: 1, position: 'absolute', right: 0, bottom: 0,
-                alignItems: 'center', justifyContent: 'flex-end', padding: 10
+                width: '100%', height: '10%',
             }]}>
-                <TouchableHighlight
-                    underlayColor={appThemeColor.buttonClk}
-                    onPress={() => {
-                        setShowHelp(true)
-                    }}
-                    style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
-                    <Image source={helpIcon} style={[common.icon, { tintColor: appThemeColor.text }]}></Image>
-                </TouchableHighlight>
+                <View style={[styles.folder, {
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }]}>
+                </View>
+                <View style={styles.folderDividerV}></View>
 
-                <TouchableHighlight
-                    underlayColor={appThemeColor.buttonClk}
-                    onPress={() => {
-                        setShowSetting(true)
-                    }}
-                    style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
-                    <Image source={settingIcon} style={[common.icon, { tintColor: appThemeColor.text }]}></Image>
-                </TouchableHighlight>
+                <View style={[styles.fdr, {
+                    width: '50%', height: '100%',
+                    alignItems: 'center', justifyContent: 'flex-end', padding: 10
+                }]}>
+                    <TouchableHighlight
+                        underlayColor={appThemeColor.buttonClk}
+                        onPress={() => {
+                            setShowHelp(true)
+                        }}
+                        style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                        <Image source={helpIcon} style={[common.icon, { tintColor: appThemeColor.text }]}></Image>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight
+                        underlayColor={appThemeColor.buttonClk}
+                        onPress={() => {
+                            setShowSetting(true)
+                        }}
+                        style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                        <Image source={settingIcon} style={[common.icon, { tintColor: appThemeColor.text }]}></Image>
+                    </TouchableHighlight>
+                </View>
 
             </View>
 
-            {/* <MyAdBanner></MyAdBanner> */}
-
+            <MyAdBanner></MyAdBanner>
 
             {showAdd && <AddFolderModal add={add} setShowAdd={setShowAdd}></AddFolderModal>}
             {showEdit && <EditFolderModal idx={selected} folder={folders[selected]} setShow={setShowEdit}></EditFolderModal>}
@@ -232,6 +246,7 @@ export default function Home() {
             {showHelp && <HelpHomeModal show={setShowHelp}></HelpHomeModal>}
             {showSetting && <SettingModal show={setShowSetting} reload={reloadApp}></SettingModal>}
             {adModal && <AdModal></AdModal>}
+            {adModal && <HistoryAd></HistoryAd>}
         </View >
     );
 }
@@ -246,7 +261,7 @@ const styles = StyleSheet.create({
     },
     folderCtn: {
         width: '100%',
-        height: '45%',
+        height: '40%',
     },
     folder: {
         width: '50%',
