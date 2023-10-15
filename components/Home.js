@@ -118,6 +118,19 @@ export default function Home() {
         navigation.replace('Home', null);
     }
 
+    // 페이지 이동
+    // function moveBack(params) {
+    //     if (page > 0) {
+    //         setPage(page - 1)
+    //     }
+    // }
+
+    // function moveForward(params) {
+    //     if (parseInt(folders.length / 4) > page) {
+    //         setPage(page + 1)
+    //     }
+    // }
+
     return (
         <View style={{ backgroundColor: appThemeColor.bg, flex: 1 }}>
 
@@ -261,7 +274,7 @@ const styles = StyleSheet.create({
     },
     folderCtn: {
         width: '100%',
-        height: '40%',
+        height: '45%',
     },
     folder: {
         width: '50%',

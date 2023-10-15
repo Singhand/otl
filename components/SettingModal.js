@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableHighlight, Alert } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, Alert, Platform, Linking } from 'react-native'
 import React, { useState } from 'react'
 import { common, text } from '../style';
 import { appThemeColor, appLang } from '../utils/appSetting'
@@ -102,6 +102,14 @@ export default function SettingModal({ show, reload }) {
         show(false)
     }
 
+    function openStore(params) {
+        if (Platform.OS === 'ios') {
+            Linking.openURL(`https://apps.apple.com/app/id123456789`);
+        } else if (Platform.OS === 'android') {
+            Linking.openURL(`market://details?id=com.kfstudio.onetouchlifeprm`);
+        }
+    }
+
     function toast() {
         // Add a Toast on screen.
         let toast = Toast.show(appLang == 0 ? '데이터를 내보냈습니다' : 'Data exported', {
@@ -141,6 +149,8 @@ export default function SettingModal({ show, reload }) {
                 <ModalButton text={appLang == 0 ? '다크모드 / 라이트모드' : 'Dark Mode / Light Mode'} idx={3} click={changeTheme}> </ModalButton>
                 <View style={[styles.w, { height: 10 }]}></View>
                 <ModalButton text='한국어 / English' idx={4} click={changeLang}> </ModalButton>
+                <View style={[styles.w, { height: 10 }]}></View>
+                <ModalButton text='프리미엄 버전 구매' idx={5} click={openStore}> </ModalButton>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 }]}>
                     <TouchableHighlight

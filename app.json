@@ -2,7 +2,7 @@
   "expo": {
     "name": "원터치라이프",
     "slug": "oneTouchLife",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,7 +15,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#d4ccbf"
       },
-      "package": "com.kfstudio.onetouchlife"
+      "package": "com.kfstudio.onetouchlife",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
