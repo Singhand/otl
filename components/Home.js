@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     },
     folderCtn: {
         width: '100%',
-        height: '45%',
+        height: '40%',
     },
     folder: {
         width: '50%',
