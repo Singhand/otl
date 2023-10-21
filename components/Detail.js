@@ -1,27 +1,26 @@
-import { StyleSheet, Text, View, Pressable, Image, TouchableHighlight, ScrollView, TextInput, Alert, BackHandler } from 'react-native'
-import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Alert, BackHandler, Image, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
-import { useDispatch, useSelector } from "react-redux";
 import { useFocusEffect } from '@react-navigation/native';
+import { useDispatch, useSelector } from "react-redux";
 
 import { common } from '../style';
-import { appThemeColor, appLang } from '../utils/appSetting'
+import { appLang, appThemeColor } from '../utils/appSetting';
 
-import History from './History';
-import EditHistoryModal from './EditHistoryModal';
-import ModalButton from './ModalButton';
 import AddQuickModal from './AddQuickModal';
+import EditHistoryModal from './EditHistoryModal';
 import EditQuickModal from './EditQuickModal';
-import TextInputLine from './TextInputLine';
 import HelpDetailModal from './HelpDetailModal';
+import History from './History';
+import ModalButton from './ModalButton';
+import TextInputLine from './TextInputLine';
 
-import backIcon from '../assets/imgs/back.png'
-import helpIcon from '../assets/imgs/help.png'
-import searchIcon from '../assets/imgs/search.png'
-import addIcon from '../assets/imgs/add.png'
+import addIcon from '../assets/imgs/add.png';
+import backIcon from '../assets/imgs/back.png';
+import helpIcon from '../assets/imgs/help.png';
+import searchIcon from '../assets/imgs/search.png';
 
 import * as HistoryDAO from '../sqlite/history';
-import * as QuickDAO from '../sqlite/quick';
 
 export default function Detail({ route, navigation }) {
     const { itemId, title } = route.params;
@@ -43,7 +42,6 @@ export default function Detail({ route, navigation }) {
     const dispatch = useDispatch();
     let items = useSelector(state => state.history.items[`${itemId}`]);
     let quicks = useSelector(state => state.quick.items[`${itemId}`]);
-
 
     useEffect(() => {
         console.log('useEffect-Detail', itemId);

@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View, TouchableHighlight, Alert, Platform, Linking } from 'react-native'
-import React, { useState } from 'react'
-import { common, text } from '../style';
-import { appThemeColor, appLang } from '../utils/appSetting'
-import * as Sharing from 'expo-sharing'
-import * as FileSystem from 'expo-file-system'
-import * as DocPick from 'expo-document-picker'
-import { close, open } from '../sqlite/database'
+import * as DocPick from 'expo-document-picker';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
+import React from 'react';
+import { Alert, Linking, Platform, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
+import { close, open } from '../sqlite/database';
+import { common } from '../style';
+import { appThemeColor } from '../utils/appSetting';
 
 import ModalButton from './ModalButton';
 
@@ -150,7 +150,7 @@ export default function SettingModal({ show, reload }) {
                 <View style={[styles.w, { height: 10 }]}></View>
                 <ModalButton text='한국어 / English' idx={4} click={changeLang}> </ModalButton>
                 <View style={[styles.w, { height: 10 }]}></View>
-                <ModalButton text='프리미엄 버전 구매' idx={5} click={openStore}> </ModalButton>
+                <ModalButton text='별점 주기' idx={5} click={openStore}> </ModalButton>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 }]}>
                     <TouchableHighlight

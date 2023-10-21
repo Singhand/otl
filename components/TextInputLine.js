@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { common } from '../style';
-import { appThemeColor, appLang } from '../utils/appSetting'
+import { appThemeColor } from '../utils/appSetting';
 
 export default function TextInputLine({ placeholder, value, set, forRef }) {
     const [focus, setFocus] = useState(false)

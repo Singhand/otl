@@ -1,13 +1,13 @@
-import { StyleSheet, Text, PixelRatio, View, Pressable, ScrollView, Button, TouchableHighlight } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import getFontSize from '../utils/getFontSize';
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
+import getFontSize from '../utils/getFontSize';
 
 import * as QuickDAO from '../sqlite/quick';
 
 import { common } from '../style';
-import { appThemeColor, appLang } from '../utils/appSetting'
+import { appThemeColor } from '../utils/appSetting';
 
 import QuickAction from './QuickAction';
 
@@ -19,9 +19,12 @@ export default function MainItem({ idx, item, click }) {
     const dispatch = useDispatch();
     let quicks = useSelector(state => state.quick.items[`${item.id}`]);
 
+    if (quicks == undefined) {
+        QuickDAO.init(item.id, dispatch)
+    }
+
     useEffect(() => {
         console.log('main item use eff');
-        QuickDAO.init(item.id, dispatch)
     }, []);
 
     return (

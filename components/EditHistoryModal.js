@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native'
-import React, { useEffect, useState, useMemo } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { useDispatch } from "react-redux";
 
 import { common } from '../style';
-import { appThemeColor, appLang } from '../utils/appSetting'
-import getFontSize from '../utils/getFontSize'
+import { appLang, appThemeColor } from '../utils/appSetting';
+import getFontSize from '../utils/getFontSize';
 
 import TextInputLine from './TextInputLine';
 

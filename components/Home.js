@@ -1,6 +1,6 @@
-import { StyleSheet, Text, PixelRatio, View, Pressable, ScrollView, Button, TouchableHighlight, Image, BackHandler, Platform } from 'react-native'
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import React, { useEffect, useState, useMemo, useCallback } from 'react'
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { BackHandler, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,26 +8,28 @@ import * as FolderDAO from '../sqlite/folder';
 import * as ItemDAO from '../sqlite/item';
 import * as UserDAO from '../sqlite/user';
 
-import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/user'
+import { showQuickType2Modal } from '../redux/slices/user';
 
+import { common, darkColors, lightColors } from '../style';
+import { appThemeColor, setLang, setTheme } from '../utils/appSetting';
 import getFontSize from '../utils/getFontSize';
-import { appThemeColor, appLang, setTheme, setLang } from '../utils/appSetting'
-import { common, darkColors, lightColors, text, englishText } from '../style';
 
-import Folder from './Folder';
 import AddFolderModal from './AddFolderModal';
-import EditFolderModal from './EditFolderModal';
 import AddItemModal from './AddItemModal';
+import EditFolderModal from './EditFolderModal';
 import EditItemModal from './EditItemModal';
-import QuickType2Modal from './QuickType2Modal';
+import Folder from './Folder';
 import HelpHomeModal from './HelpHomeModal';
+import QuickType2Modal from './QuickType2Modal';
 import SettingModal from './SettingModal';
-import AdModal from './AdModal';
-import MyAdBanner from './MyAdBanner';
-import HistoryAd from './HistoryAd';
+// import AdModal from './AdModal';
+// import MyAdBanner from './MyAdBanner';
+// import HistoryAd from './HistoryAd';
 
-import helpIcon from '../assets/imgs/help.png'
-import settingIcon from '../assets/imgs/settings.png'
+import helpIcon from '../assets/imgs/help.png';
+import leftIcon from '../assets/imgs/left.png';
+import rightIcon from '../assets/imgs/right.png';
+import settingIcon from '../assets/imgs/settings.png';
 
 export default function Home() {
     const navigation = useNavigation();
@@ -119,17 +121,17 @@ export default function Home() {
     }
 
     // 페이지 이동
-    // function moveBack(params) {
-    //     if (page > 0) {
-    //         setPage(page - 1)
-    //     }
-    // }
+    function moveBack(params) {
+        if (page > 0) {
+            setPage(page - 1)
+        }
+    }
 
-    // function moveForward(params) {
-    //     if (parseInt(folders.length / 4) > page) {
-    //         setPage(page + 1)
-    //     }
-    // }
+    function moveForward(params) {
+        if (parseInt(folders.length / 4) > page) {
+            setPage(page + 1)
+        }
+    }
 
     return (
         <View style={{ backgroundColor: appThemeColor.bg, flex: 1 }}>
@@ -217,16 +219,41 @@ export default function Home() {
             <View style={[styles.fdr, {
                 width: '100%', height: '10%',
             }]}>
-                <View style={[styles.folder, {
+                <View style={[styles.fdr, {
+                    flex: 1,
+                    padding: 10,
+                }]}>
+                </View>
+
+                <View style={[styles.fdr, {
+                    flex: 1,
                     alignItems: 'center',
                     justifyContent: 'center',
                 }]}>
+                    <TouchableHighlight
+                        underlayColor={appThemeColor.buttonClk}
+                        onPress={() => {
+                            moveBack()
+                        }}
+                        style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                        <Image source={leftIcon} style={[common.icon, { tintColor: appThemeColor.text }]}></Image>
+                    </TouchableHighlight>
+                    <Text style={[common.text, { color: appThemeColor.text }]}>{page}</Text>
+                    <TouchableHighlight
+                        underlayColor={appThemeColor.buttonClk}
+                        onPress={() => {
+                            moveForward()
+                        }}
+                        style={[styles.e, { justifyContent: 'center', borderRadius: 100, padding: 10 }]}>
+                        <Image source={rightIcon} style={[common.icon, { tintColor: appThemeColor.text }]}></Image>
+                    </TouchableHighlight>
                 </View>
-                <View style={styles.folderDividerV}></View>
 
                 <View style={[styles.fdr, {
-                    width: '50%', height: '100%',
-                    alignItems: 'center', justifyContent: 'flex-end', padding: 10
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    padding: 10,
                 }]}>
                     <TouchableHighlight
                         underlayColor={appThemeColor.buttonClk}
@@ -249,7 +276,7 @@ export default function Home() {
 
             </View>
 
-            <MyAdBanner></MyAdBanner>
+            {/* <MyAdBanner></MyAdBanner> */}
 
             {showAdd && <AddFolderModal add={add} setShowAdd={setShowAdd}></AddFolderModal>}
             {showEdit && <EditFolderModal idx={selected} folder={folders[selected]} setShow={setShowEdit}></EditFolderModal>}
@@ -258,8 +285,8 @@ export default function Home() {
             {isShowQuickType2Modal && <QuickType2Modal></QuickType2Modal>}
             {showHelp && <HelpHomeModal show={setShowHelp}></HelpHomeModal>}
             {showSetting && <SettingModal show={setShowSetting} reload={reloadApp}></SettingModal>}
-            {adModal && <AdModal></AdModal>}
-            {adModal && <HistoryAd></HistoryAd>}
+            {/* {adModal && <AdModal></AdModal>}
+            {adModal && <HistoryAd></HistoryAd>} */}
         </View >
     );
 }
@@ -274,7 +301,7 @@ const styles = StyleSheet.create({
     },
     folderCtn: {
         width: '100%',
-        height: '40%',
+        height: '45%',
     },
     folder: {
         width: '50%',

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "원터치라이프",
+    "name": "원터치라이프 프리미엄",
     "slug": "oneTouchLife",
     "version": "1.0.2",
     "orientation": "portrait",
@@ -13,9 +13,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#d4ccbf"
+        "backgroundColor": "#1a1f25"
       },
-      "package": "com.kfstudio.onetouchlife"
+      "package": "com.kfstudio.onetouchlifeprm"
     },
     "web": {
       "favicon": "./assets/favicon.png"

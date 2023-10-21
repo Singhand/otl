@@ -1,16 +1,16 @@
-import { StyleSheet, Text, View, TouchableHighlight, TextInput, Alert } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Alert, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import { useDispatch, useSelector } from "react-redux";
 
-import getFontSize from '../utils/getFontSize'
+import getFontSize from '../utils/getFontSize';
 
 import * as ItemDAO from '../sqlite/item';
 
 import TextInputLine from './TextInputLine';
 
 import { common } from '../style';
-import { appThemeColor, appLang } from '../utils/appSetting'
+import { appLang, appThemeColor } from '../utils/appSetting';
 
 export default function EditItemModal({ item, folderId, itemIdx, show }) {
 

@@ -3,8 +3,8 @@ import React from 'react'
 import { common } from '../style';
 import { appThemeColor, appLang } from '../utils/appSetting'
 
-import HelpImg from '../assets/imgs/Help1.jpg'
-import HelpImg2 from '../assets/imgs/Help1ENG.jpg'
+import HelpImg from '../assets/imgs/Help1.png'
+import HelpImg2 from '../assets/imgs/Help1ENG.png'
 
 export default function HelpHomeModal({ show }) {
     return (

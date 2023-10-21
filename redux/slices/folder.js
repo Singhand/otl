@@ -7,7 +7,7 @@ export const folder = createSlice({
     },
     reducers: {
         load: (state, action) => {
-            console.log('load', action.payload);
+            console.log('load folder', action.payload);
             state.folders = action.payload;
         },
     },

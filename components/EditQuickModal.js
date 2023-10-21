@@ -19,11 +19,19 @@ export default function EditQuickModal({ item, idx, show }) {
 
     const [type, setType] = useState(item.type)
     const [title, setTitle] = useState(item.title)
+    const [prefix, setPrefix] = useState(item.prefix)
+    const [suffix, setSuffix] = useState(item.suffix)
 
     function edit(param) {
-        let itemTemp = { ...item }
-        itemTemp.title = title
-        QuickDAO.edit(itemTemp, dispatch);
+        if (title.length > 0 && title.length <= 100
+            && prefix.length >= 0 && prefix.length <= 100
+            && suffix.length >= 0 && suffix.length <= 100) {
+            let itemTemp = { ...item }
+            itemTemp.title = title
+            itemTemp.prefix = prefix
+            itemTemp.suffix = suffix
+            QuickDAO.edit(itemTemp, dispatch);
+        }
     }
 
     function remove() {
@@ -87,9 +95,12 @@ export default function EditQuickModal({ item, idx, show }) {
                     <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', }]}>{appLang == 0 ? '빠른 기록 수정' : 'Edit Quick Action'}</Text>
                 </View>
                 <View style={[styles.e, { marginVertical: 20 }]}>
-
                     {type == 1 && <TextInputLine placeholder={appLang == 0 ? '고정 텍스트를 입력하세요' : 'Enter a fixed text'} value={title} set={setTitle}></TextInputLine>}
-                    {type == 2 && <TextInputLine placeholder={appLang == 0 ? '표시될 이름을 입력하세요' : 'Enter a title of quick action'} value={title} set={setTitle}></TextInputLine>}
+                    {type == 2 && <View style={[styles.e, { gap: 10 }]}>
+                        <TextInputLine placeholder={appLang == 0 ? '표시될 이름을 입력하세요' : 'Enter a title of quick action'} value={title} set={setTitle}></TextInputLine>
+                        <TextInputLine value={prefix} set={setPrefix} placeholder={appLang == 0 ? '접두사를 입력하세요 (미입력 가능)' : 'Enter a prefix (It is ok to not type)'}></TextInputLine>
+                        <TextInputLine value={suffix} set={setSuffix} placeholder={appLang == 0 ? '접미사를 입력하세요 (미입력 가능)' : 'Enter a suffix (It is ok to not type)'}></TextInputLine>
+                    </View>}
                 </View>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', flexWrap: 'wrap' }]}>

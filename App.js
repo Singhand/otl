@@ -13,13 +13,13 @@ import store from './redux/store';
 import Home from './components/Home';
 import Detail from './components/Detail';
 
-import mobileAds from 'react-native-google-mobile-ads';
+// import mobileAds from 'react-native-google-mobile-ads';
 
-mobileAds()
-  .initialize()
-  .then(adapterStatuses => {
-    // Initialization complete!
-  });
+// mobileAds()
+//   .initialize()
+//   .then(adapterStatuses => {
+//     // Initialization complete!
+//   });
 
 
 const Stack = createNativeStackNavigator();

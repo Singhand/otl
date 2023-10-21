@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useRef, useState } from 'react';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 
-import getFontSize from '../utils/getFontSize'
+import getFontSize from '../utils/getFontSize';
 
-import { common, text } from '../style';
-import { appThemeColor, appLang } from '../utils/appSetting'
+import { common } from '../style';
+import { appLang, appThemeColor } from '../utils/appSetting';
 
-import { showQuickType2Modal, setQuickItem, showAdModal } from '../redux/slices/user'
+import { showQuickType2Modal } from '../redux/slices/user';
 
 import Toast from 'react-native-root-toast';
 import TextInputLine from './TextInputLine';
@@ -40,16 +40,10 @@ export default function QuickType2Modal({ }) {
     focusTextInput()
 
     function add(content) {
-        setAd()
-    }
-
-    function setAd(params) {
-        dispatch(showAdModal(true))
-        setTimeout(() => {
-            dispatch(showAdModal(false))
-            HistoryDAO.add(item.itemId, content, dispatch)
-            toast()
-        }, 5000);
+        // 접두사 접미사 합성
+        let combined = item.prefix + ' ' + content + ' ' + item.suffix
+        HistoryDAO.add(item.itemId, combined.trim(), dispatch)
+        toast()
     }
 
     function toast() {

@@ -42,7 +42,7 @@ export function add(title, dispatch) {
         let date = new Date();
         tx.executeSql(`insert into folders (title, itemOrder) values(?,?)`, [title, date.getTime()],
             (txObj, rs) => {
-                console.log('add success');
+                console.log('add folder success');
             },
             (txObj, err) => { console.log(err); });
     }, (err) => { console.log(err); },
@@ -57,6 +57,19 @@ export function edit(id, title, dispatch) {
     db.transaction(tx => {
         console.log('update title to', title);
         tx.executeSql(`update folders set title=? where id=?`, [title, id],
+            (txObj, rs) => {
+                console.log('update success');
+                init(dispatch);
+            },
+            (txObj, err) => { console.log(err); });
+    });
+}
+
+export function fold(folder, dispatch) {
+    const change = folder.opened == 0 ? 1 : 0
+    db.transaction(tx => {
+        console.log('update opened', change);
+        tx.executeSql(`update folders set opened=? where id=?`, [change, folder.id],
             (txObj, rs) => {
                 console.log('update success');
                 init(dispatch);

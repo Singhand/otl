@@ -19,6 +19,8 @@ export default function AddQuickModal({ show, click, itemId }) {
     const [showPage, setShowPage] = useState(0) // 선택 타입
     const [type1title, setType1title] = useState('');
     const [type2title, setType2title] = useState('');
+    const [type2prefix, setType2prefix] = useState('');
+    const [type2suffix, setType2suffix] = useState('');
 
     function add() {
         let quickAdd = {
@@ -34,8 +36,12 @@ export default function AddQuickModal({ show, click, itemId }) {
                 QuickDAO.add(quickAdd, dispatch)
             }
         } else if (showPage == 2) {
-            if (type2title.length > 0 && type2title.length <= 100) {
+            if (type2title.length > 0 && type2title.length <= 100
+                && type2prefix.length >= 0 && type2prefix.length <= 100
+                && type2suffix.length >= 0 && type2suffix.length <= 100) {
                 quickAdd['title'] = type2title
+                quickAdd['prefix'] = type2prefix
+                quickAdd['suffix'] = type2suffix
                 quickAdd['type'] = 2
                 QuickDAO.add(quickAdd, dispatch)
             }
@@ -57,8 +63,10 @@ export default function AddQuickModal({ show, click, itemId }) {
                     <TextInputLine value={type1title} set={setType1title} placeholder={appLang == 0 ? '고정 텍스트를 입력하세요' : 'Enter a fixed text'}></TextInputLine>
                 </View>}
 
-                {showPage == 2 && <View>
+                {showPage == 2 && <View style={[styles.e, { gap: 10 }]}>
                     <TextInputLine value={type2title} set={setType2title} placeholder={appLang == 0 ? '표시될 이름을 입력하세요' : 'Enter a title of quick action'}></TextInputLine>
+                    <TextInputLine value={type2prefix} set={setType2prefix} placeholder={appLang == 0 ? '접두사를 입력하세요 (미입력 가능)' : 'Enter a prefix (It is ok to not type)'}></TextInputLine>
+                    <TextInputLine value={type2suffix} set={setType2suffix} placeholder={appLang == 0 ? '접미사를 입력하세요 (미입력 가능)' : 'Enter a suffix (It is ok to not type)'}></TextInputLine>
                 </View>}
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 }]}>
