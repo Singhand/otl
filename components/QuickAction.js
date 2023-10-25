@@ -62,7 +62,7 @@ export default function QuickAction({ item }) {
                 onPress={() => {
                     add();
                 }}>
-                <Text style={[common.text, { color: appThemeColor.text }, { padding: 5 }]}>{item.title}</Text>
+                <Text style={[common.text, { color: appThemeColor.text }, { fontSize: 14, padding: 5 }]}>{item.title}</Text>
             </TouchableHighlight>
         </View>
     )
