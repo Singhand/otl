@@ -150,7 +150,7 @@ export default function SettingModal({ show, reload }) {
                 <View style={[styles.w, { height: 10 }]}></View>
                 <ModalButton text='한국어 / English' idx={4} click={changeLang}> </ModalButton>
                 <View style={[styles.w, { height: 10 }]}></View>
-                <ModalButton text='별점 주기' idx={5} click={openStore}> </ModalButton>
+                <ModalButton text={appLang == 0 ? '별점 주기' : 'Rate this app'} idx={5} click={openStore}> </ModalButton>
 
                 <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 }]}>
                     <TouchableHighlight

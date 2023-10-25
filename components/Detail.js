@@ -135,7 +135,7 @@ export default function Detail({ route, navigation }) {
                 </TouchableHighlight>
 
                 <View style={[styles.e, { flex: 1, }]}>
-                    <Text style={[common.text, { color: appThemeColor.text }, { fontSize: 24, textAlign: 'left' }]} numberOfLines={1}>{title}</Text>
+                    <Text style={[common.text, { color: appThemeColor.text }, { fontSize: 18, textAlign: 'left' }]} numberOfLines={1}>{title}</Text>
                 </View>
 
                 <TouchableHighlight
