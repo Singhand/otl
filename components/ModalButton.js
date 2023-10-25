@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-import { common, colors } from '../style';
-import { appThemeColor, appLang } from '../utils/appSetting'
+import { common } from '../style';
+import { appThemeColor } from '../utils/appSetting';
 
 
 export default function ModalButton({ idx, click, text }) {
