@@ -12,7 +12,7 @@ import TextInputLine from './TextInputLine';
 import { common } from '../style';
 import { appLang, appThemeColor } from '../utils/appSetting';
 
-export default function EditItemModal({ item, folderId, itemIdx, show }) {
+export default function EditItemModal({ item, folderId, itemIdx, show, showMove }) {
 
     // Redux
     const dispatch = useDispatch();
@@ -145,7 +145,7 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                     </TouchableHighlight>
                 </View>
 
-                <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row' }]}>
+                <View style={[styles.fxr, { justifyContent: 'flex-end', flexDirection: 'row', flexWrap: 'wrap' }]}>
                     <TouchableHighlight
                         underlayColor={appThemeColor.modalButtonClk}
                         onPress={() => {
@@ -162,6 +162,16 @@ export default function EditItemModal({ item, folderId, itemIdx, show }) {
                         }}>
 
                         <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '삭제' : 'Delete'}</Text>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight
+                        underlayColor={appThemeColor.modalButtonClk}
+                        onPress={() => {
+                            showMove(true);
+                            show(false)
+                        }}>
+
+                        <Text style={[common.text, { color: appThemeColor.text }, { fontWeight: 'bold', padding: getFontSize(10), }]}>{appLang == 0 ? '폴더 이동' : 'Move Folder'}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight

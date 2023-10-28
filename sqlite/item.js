@@ -74,6 +74,20 @@ export function edit(id, title, folder, dispatch) {
     });
 }
 
+export function moveFolder(id, from, to, dispatch) {
+    db.transaction(tx => {
+        let date = new Date();
+        console.log('move item', id);
+        tx.executeSql(`update items set folderId=?,itemOrder=? where id=?`, [to, date.getTime(), id],
+            (txObj, rs) => {
+                console.log('update success');
+                init(from, dispatch);
+                init(to, dispatch);
+            },
+            (txObj, err) => { console.log(err); });
+    });
+}
+
 export function remove(id, folder, dispatch) {
     db.transaction(tx => {
         // 아이템 삭제, 기록 삭제, 퀵 삭제

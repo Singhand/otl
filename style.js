@@ -67,6 +67,9 @@ export const common = StyleSheet.create({
     bold: {
         fontWeight: 'bold'
     },
+    listGap: {
+        gap: 10
+    },
 
     // Modal
     modalBg: {

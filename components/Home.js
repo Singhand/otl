@@ -18,6 +18,7 @@ import AddFolderModal from './AddFolderModal';
 import AddItemModal from './AddItemModal';
 import EditFolderModal from './EditFolderModal';
 import EditItemModal from './EditItemModal';
+import MoveItemModal from './MoveItemModal';
 import Folder from './Folder';
 import HelpHomeModal from './HelpHomeModal';
 import QuickType2Modal from './QuickType2Modal';
@@ -42,6 +43,7 @@ export default function Home() {
     const [selectedItem, setSelectedItem] = useState(-1);
     const [showAddItem, setShowAddItem] = useState(false);
     const [showEditItem, setShowEditItem] = useState(false);
+    const [showMoveItem, setShowMoveItem] = useState(false);
 
     const [item, setItem] = useState(0)
 
@@ -144,7 +146,9 @@ export default function Home() {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }]}>
-                    {(folders.length > (page * 4)) && <Folder setItem={setItem} setShowEditItem={setShowEditItem} setSelectedItem={setSelectedItem} setSelected={setSelected} setShowEdit={setShowEdit} showAddItem={setShowAddItem} idx={(page * 4)}
+                    {(folders.length > (page * 4)) && <Folder setItem={setItem} setShowEditItem={setShowEditItem}
+                        setSelectedItem={setSelectedItem} setSelected={setSelected} setShowEdit={setShowEdit}
+                        showAddItem={setShowAddItem} idx={(page * 4)}
                         folders={folders}></Folder>}
 
                     {(folders.length == (page * 4)) &&
@@ -281,7 +285,9 @@ export default function Home() {
             {showAdd && <AddFolderModal add={add} setShowAdd={setShowAdd}></AddFolderModal>}
             {showEdit && <EditFolderModal idx={selected} folder={folders[selected]} setShow={setShowEdit}></EditFolderModal>}
             {showAddItem && <AddItemModal add={addItem} show={setShowAddItem}></AddItemModal>}
-            {showEditItem && <EditItemModal item={item} folderId={folders[selected].id} itemIdx={selectedItem} show={setShowEditItem}></EditItemModal>}
+            {showEditItem && <EditItemModal item={item} folderId={folders[selected].id} itemIdx={selectedItem}
+                show={setShowEditItem} showMove={setShowMoveItem}></EditItemModal>}
+            {showMoveItem && <MoveItemModal item={item} folderId={folders[selected].id} folders={folders} show={setShowMoveItem}></MoveItemModal>}
             {isShowQuickType2Modal && <QuickType2Modal></QuickType2Modal>}
             {showHelp && <HelpHomeModal show={setShowHelp}></HelpHomeModal>}
             {showSetting && <SettingModal show={setShowSetting} reload={reloadApp}></SettingModal>}
