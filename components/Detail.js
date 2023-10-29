@@ -4,6 +4,8 @@ import { Alert, BackHandler, Image, ScrollView, StyleSheet, Text, TouchableHighl
 import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from "react-redux";
 
+import { setHelpFirst2 } from '../redux/slices/user';
+
 import { common } from '../style';
 import { appLang, appThemeColor } from '../utils/appSetting';
 
@@ -21,6 +23,7 @@ import helpIcon from '../assets/imgs/help.png';
 import searchIcon from '../assets/imgs/search.png';
 
 import * as HistoryDAO from '../sqlite/history';
+import * as UserDAO from '../sqlite/user';
 
 export default function Detail({ route, navigation }) {
     const { itemId, title } = route.params;
@@ -42,11 +45,19 @@ export default function Detail({ route, navigation }) {
     const dispatch = useDispatch();
     let items = useSelector(state => state.history.items[`${itemId}`]);
     let quicks = useSelector(state => state.quick.items[`${itemId}`]);
+    let helpFirst2 = useSelector(state => state.user.helpFirst2);
+
+    // 앱 처음 실행한 경우 도움말 열기
+    if (helpFirst2 && !showHelp) {
+        setShowHelp(true);
+        dispatch(setHelpFirst2(false))
+    }
 
     useEffect(() => {
         console.log('useEffect-Detail', itemId);
         HistoryDAO.setSearchWord('')
         HistoryDAO.init(itemId, dispatch)
+        UserDAO.checkFirst(2, dispatch)
     }, []);
 
     // 뒤로가기 버튼 제어

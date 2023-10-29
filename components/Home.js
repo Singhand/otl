@@ -8,7 +8,7 @@ import * as FolderDAO from '../sqlite/folder';
 import * as ItemDAO from '../sqlite/item';
 import * as UserDAO from '../sqlite/user';
 
-import { showQuickType2Modal } from '../redux/slices/user';
+import { showQuickType2Modal, setHelpFirst1 } from '../redux/slices/user';
 
 import { common, darkColors, lightColors } from '../style';
 import { appThemeColor, setLang, setTheme } from '../utils/appSetting';
@@ -54,9 +54,15 @@ export default function Home() {
     const dispatch = useDispatch();
     let folders = useSelector(state => state.folder.folders);
     let isShowQuickType2Modal = useSelector(state => state.user.quickType2Modal);
-    let adModal = useSelector(state => state.user.adModal);
     let appTheme = useSelector(state => state.user.theme);
     let appLang = useSelector(state => state.user.lang);
+    let helpFirst1 = useSelector(state => state.user.helpFirst1);
+
+    // 앱 처음 실행한 경우 도움말 열기
+    if (helpFirst1 && !showHelp) {
+        setShowHelp(true);
+        dispatch(setHelpFirst1(false))
+    }
 
     // 앱 테마, 언어 스타일
     setTheme((appTheme == 0) ? darkColors : lightColors);
@@ -66,6 +72,7 @@ export default function Home() {
         console.log('useEffect-Home');
         FolderDAO.init(dispatch);
         UserDAO.initSetting(dispatch);
+        UserDAO.checkFirst(1, dispatch)
     }, []);
 
     // 뒤로가기 버튼 제어
@@ -95,9 +102,8 @@ export default function Home() {
                 } else if (showSetting) {
                     setShowSetting(false)
                     return true;
-                } else if (adModal) {
-                    return true;
-                } else {
+                }
+                else {
                     return false;
                 }
             };
@@ -105,7 +111,7 @@ export default function Home() {
             const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
             return () => subscription.remove();
-        }, [showAdd, showEdit, showAddItem, showEditItem, isShowQuickType2Modal, showHelp, showSetting, adModal])
+        }, [showAdd, showEdit, showAddItem, showEditItem, isShowQuickType2Modal, showHelp, showSetting])
     );
 
     // 폴더 추가

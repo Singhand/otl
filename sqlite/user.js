@@ -1,4 +1,4 @@
-import { setTheme, setLang } from '../redux/slices/user';
+import { setTheme, setLang, setHelpFirst1, setHelpFirst2 } from '../redux/slices/user';
 import { db } from './database'
 
 // drop();
@@ -13,6 +13,9 @@ export function create(params) {
                 console.log('insert default user setting')
                 txObj.executeSql('insert into user (key,value) values (?,?),(?,?)', ['theme', 0, 'lang', 0],
                     (txObj, rs) => { console.log('default user setting success') },
+                    (txObj, err) => { console.log(err); })
+                txObj.executeSql('insert into user (key,value) values (?,?),(?,?)', ['helpFirst1', 1, 'helpFirst2', 1],
+                    (txObj, rs) => { console.log('default help user success') },
                     (txObj, err) => { console.log(err); })
             },
             (txObj, err) => { console.log(err); });
@@ -30,6 +33,27 @@ export function initSetting(dispatch) {
                         dispatch(setTheme(item.value))
                     } else if (item.key == 'lang') {
                         dispatch(setLang(item.value))
+                    }
+                }
+            },
+            (txObj, err) => { console.log(err); });
+    });
+}
+
+export function checkFirst(num, dispatch) {
+    db.transaction(tx => {
+        tx.executeSql('select * from user where key=?', [`helpFirst${num}`],
+            (txObj, rs) => {
+                console.log('checkFirst')
+                for (let i = 0; i < rs.rows.length; i++) {
+                    let item = rs.rows.item(i);
+                    if (item.value == 1) {
+                        if (num == 1) {
+                            dispatch(setHelpFirst1(true))
+                        } else if (num == 2) {
+                            dispatch(setHelpFirst2(true))
+                        }
+                        txObj.executeSql('update user set value=0 where key=?', [`helpFirst${num}`])
                     }
                 }
             },
