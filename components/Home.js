@@ -93,6 +93,9 @@ export default function Home() {
                 } else if (showEditItem) {
                     setShowEditItem(false)
                     return true;
+                } else if (showMoveItem) {
+                    setShowMoveItem(false)
+                    return true;
                 } else if (isShowQuickType2Modal) {
                     dispatch(showQuickType2Modal(false))
                     return true;
@@ -111,7 +114,7 @@ export default function Home() {
             const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
             return () => subscription.remove();
-        }, [showAdd, showEdit, showAddItem, showEditItem, isShowQuickType2Modal, showHelp, showSetting])
+        }, [showAdd, showEdit, showAddItem, showEditItem, isShowQuickType2Modal, showHelp, showSetting, showMoveItem])
     );
 
     // 폴더 추가
