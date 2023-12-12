@@ -29,6 +29,7 @@ export function initSetting(dispatch) {
                 console.log('init setting')
                 for (let i = 0; i < rs.rows.length; i++) {
                     let item = rs.rows.item(i);
+                    console.log(item)
                     if (item.key == 'theme') {
                         dispatch(setTheme(item.value))
                     } else if (item.key == 'lang') {

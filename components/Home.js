@@ -114,7 +114,7 @@ export default function Home() {
             const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
             return () => subscription.remove();
-        }, [showAdd, showEdit, showAddItem, showEditItem, isShowQuickType2Modal, showHelp, showSetting, showMoveItem])
+        }, [showAdd, showEdit, showAddItem, showEditItem, showMoveItem, isShowQuickType2Modal, showHelp, showSetting])
     );
 
     // 폴더 추가
