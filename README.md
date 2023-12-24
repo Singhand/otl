@@ -4,9 +4,7 @@
 
 [https://play.google.com/store/apps/details?id=com.kfstudio.onetouchlife](https://play.google.com/store/apps/details?id=com.kfstudio.onetouchlife)
 
-![Surface Pro 8 - 1.png](./readme/Surface_Pro_8_-_1.png)
-
-![Surface Pro 8 - 3.png](./readme/Surface_Pro_8_-_3.png)
+![Surface Pro 8 - 1.png](./readme/Surface_Pro_8_-_1.png) | ![Surface Pro 8 - 3.png](./readme/Surface_Pro_8_-_3.png)
 
 # 진행 기간
 
