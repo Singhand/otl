@@ -30,9 +30,6 @@ import Folder from "../components/content/folder/Folder";
 import HelpHomeModal from "../components/modal/home/HelpHomeModal";
 import QuickType2Modal from "../components/modal/home/QuickType2Modal";
 import SettingModal from "../components/modal/home/SettingModal";
-// import AdModal from './AdModal';
-// import MyAdBanner from './MyAdBanner';
-// import HistoryAd from './HistoryAd';
 
 import helpIcon from "../assets/imgs/help.png";
 import leftIcon from "../assets/imgs/left.png";

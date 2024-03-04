@@ -1,17 +1,17 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootSiblingParent } from "react-native-root-siblings";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import { useEffect } from "react";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-import Home from "./pages/Home";
 import Detail from "./pages/Detail";
+import Home from "./pages/Home";
 
 // import mobileAds from 'react-native-google-mobile-ads';
 

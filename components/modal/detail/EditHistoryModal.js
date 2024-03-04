@@ -6,7 +6,7 @@ import { common } from "../../../style/style";
 import { appLang, appThemeColor } from "../../../utils/appSetting";
 import getFontSize from "../../../utils/getFontSize";
 
-import TextInputLine from "../../TextInputLine";
+import TextInputLine from "../../common/TextInputLine";
 
 import * as HistoryDAO from "../../../sqlite/history";
 

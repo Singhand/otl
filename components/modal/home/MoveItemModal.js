@@ -1,18 +1,18 @@
+import React from "react";
 import {
   ScrollView,
   StyleSheet,
   Text,
-  View,
   TouchableHighlight,
+  View,
 } from "react-native";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import * as ItemDAO from "../../../sqlite/item";
 import { common } from "../../../style/style";
 import { appLang, appThemeColor } from "../../../utils/appSetting";
 import getFontSize from "../../../utils/getFontSize";
-import * as ItemDAO from "../../../sqlite/item";
 
-import ModalButton from "../../ModalButton";
+import ModalButton from "../../common/ModalButton";
 
 export default function MoveItemModal({ item, folderId, folders, show }) {
   // Redux

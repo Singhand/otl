@@ -16,7 +16,7 @@ import { appThemeColor, appLang } from "../../../utils/appSetting";
 
 import * as QuickDAO from "../../../sqlite/quick";
 
-import TextInputLine from "../../TextInputLine";
+import TextInputLine from "../../common/TextInputLine";
 
 export default function EditQuickModal({ item, idx, show }) {
   // Redux

@@ -16,7 +16,7 @@ import { close, open } from "../../../sqlite/database";
 import { common } from "../../../style/style";
 import { appThemeColor } from "../../../utils/appSetting";
 
-import ModalButton from "../../ModalButton";
+import ModalButton from "../../common/ModalButton";
 
 import Toast from "react-native-root-toast";
 

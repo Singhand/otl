@@ -18,12 +18,12 @@ import { setHelpFirst2 } from "../redux/slices/user";
 import { common } from "../style/style";
 import { appLang, appThemeColor } from "../utils/appSetting";
 
-import AddQuickModal from "../components/AddQuickModal";
-import EditHistoryModal from "../components/EditHistoryModal";
-import EditQuickModal from "../components/EditQuickModal";
-import HelpDetailModal from "../components/HelpDetailModal";
+import AddQuickModal from "../components/modal/detail/AddQuickModal";
+import EditHistoryModal from "../components/modal/detail/EditHistoryModal";
+import EditQuickModal from "../components/modal/detail/EditQuickModal";
+import HelpDetailModal from "../components/modal/detail/HelpDetailModal";
 import History from "../components/content/history/History";
-import ModalButton from "../components/ModalButton";
+import ModalButton from "../components/common/ModalButton";
 import TextInputLine from "../components/common/TextInputLine";
 
 import addIcon from "../assets/imgs/add.png";

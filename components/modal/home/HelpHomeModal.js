@@ -9,8 +9,8 @@ import React from "react";
 import { common } from "../../../style/style";
 import { appThemeColor, appLang } from "../../../utils/appSetting";
 
-import HelpImg from "../assets/imgs/Help1.png";
-import HelpImg2 from "../assets/imgs/Help1ENG.png";
+import HelpImg from "../../../assets/imgs/Help1.png";
+import HelpImg2 from "../../../assets/imgs/Help1ENG.png";
 
 export default function HelpHomeModal({ show }) {
   return (
