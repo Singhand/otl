@@ -68,6 +68,7 @@ export default function QuickAction({ item }) {
         onPress={() => {
           add();
         }}
+        style={[{ flex: 1 }]}
       >
         <Text
           style={[

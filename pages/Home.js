@@ -193,6 +193,7 @@ export default function Home() {
               onPress={() => {
                 setShowAdd(true);
               }}
+              style={[styles.addCtn]}
             >
               <Text style={[styles.add, { color: appThemeColor.text }]}>+</Text>
             </TouchableHighlight>
@@ -228,6 +229,7 @@ export default function Home() {
               onPress={() => {
                 setShowAdd(true);
               }}
+              style={[styles.addCtn]}
             >
               <Text style={[styles.add, { color: appThemeColor.text }]}>+</Text>
             </TouchableHighlight>
@@ -266,6 +268,7 @@ export default function Home() {
               onPress={() => {
                 setShowAdd(true);
               }}
+              style={[styles.addCtn]}
             >
               <Text style={[styles.add, { color: appThemeColor.text }]}>+</Text>
             </TouchableHighlight>
@@ -300,6 +303,7 @@ export default function Home() {
               onPress={() => {
                 setShowAdd(true);
               }}
+              style={[styles.addCtn]}
             >
               <Text style={[styles.add, { color: appThemeColor.text }]}>+</Text>
             </TouchableHighlight>
@@ -467,6 +471,12 @@ const styles = StyleSheet.create({
   },
   add: {
     fontSize: getFontSize(40),
+  },
+  addCtn: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   folderCtn: {
     width: "100%",
