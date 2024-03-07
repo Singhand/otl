@@ -52,12 +52,12 @@ export default function Folder({
   return (
     <ScrollView
       style={[
-        styles.e,
         {
           width: "100%",
           height: "100%",
         },
       ]}
+      contentContainerStyle={{ paddingTop: 10, paddingStart: 10 }}
     >
       <FolderTitle
         title={folder.title}

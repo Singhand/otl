@@ -485,8 +485,6 @@ const styles = StyleSheet.create({
   folder: {
     width: "50%",
     height: "100%",
-    paddingHorizontal: getFontSize(10),
-    paddingTop: getFontSize(10),
   },
   folderTitle: {
     fontSize: getFontSize(24),
